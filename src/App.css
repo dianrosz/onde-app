@@ -1,0 +1,28 @@
+:root {
+  --blue: #08376b;
+}
+
+* {
+  text-decoration: none !important;
+  margin: 0;
+  padding: 0;
+}
+main {
+  margin: 0;
+  padding: 0;
+  text-decoration: none !important;
+  width: 100%;
+}
+h5 {
+  font-size: 15px;
+  align-items: center;
+  color: #08376b;
+  margin: 15px 8px 15px 8px;
+}
+.card {
+  min-height: 70vh;
+  margin-top: 20px;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}

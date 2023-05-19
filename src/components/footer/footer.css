@@ -1,0 +1,16 @@
+.footer {
+  left: 0;
+  bottom: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+  box-shadow: 3px 0 3px 0 rgba(0, 0, 0, 0.2);
+}
+.bottom {
+  color: black;
+  padding: 2px;
+}
+.bottom p {
+  padding-top: 2px;
+}
