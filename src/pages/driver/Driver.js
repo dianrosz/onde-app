@@ -9,7 +9,7 @@ const Driver = () => {
     <section>
       <div className="listDriver">
         <div className="judul">
-          <h4>Daftar Driver</h4>
+          <h4>DAFTAR DRIVER</h4>
         </div>
         <div className="card">
           <div className="main-card">

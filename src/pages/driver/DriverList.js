@@ -23,24 +23,10 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import Modal from "@mui/material/Modal";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Autocomplete, TextField, Typography } from "@mui/material";
-import AddDriver from "./AddDriver";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
 
 export default function DriverList() {
   const [page, setPage] = React.useState(0);
@@ -103,18 +89,6 @@ export default function DriverList() {
 
   return (
     <>
-      <div>
-        <Modal
-          open={open}
-          // onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            <AddDriver closeEvent={handleClose} />
-          </Box>
-        </Modal>
-      </div>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <Box height={10} />
         <Stack direction="row" spacing={2} className="my-2 mb-2 m-2">
@@ -134,12 +108,8 @@ export default function DriverList() {
             component="div"
             sx={{ flexGrow: 1 }}
           ></Typography>
-          <Button
-            variant="contained"
-            endIcon={<AddCircleIcon />}
-            onClick={handleOpen}
-          >
-            Tambah Driver
+          <Button size="small" variant="contained" href="/addDriver">
+            Tambah Driver +
           </Button>
         </Stack>
         <Box height={10} />
@@ -174,7 +144,7 @@ export default function DriverList() {
                         {row.kontak}
                       </TableCell>
                       <TableCell key={row.id} align="left">
-                        {row.kelamin}
+                        {row.gender}
                       </TableCell>
                       <TableCell key={row.id} align="left">
                         <Stack spacing={2} direction="row">

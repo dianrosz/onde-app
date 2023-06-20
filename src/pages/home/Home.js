@@ -1,10 +1,14 @@
 import React from "react";
-import "./home.css";
+import { Button } from "@mui/material";
+import { useState } from "react";
+import { auth } from "../../firebase/config";
+
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 const Home = () => {
   return (
     <section>
-      <div className="home">Beranda</div>
+      <p>HOME </p>
     </section>
   );
 };
