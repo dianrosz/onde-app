@@ -12,8 +12,8 @@ const Header = () => {
   const logoutUser = () => {
     signOut(auth)
       .then(() => {
-        toast.success("Logout Berhasilll ");
-        navigate("/login");
+        toast.success("Logout Berhasil ");
+        navigate("/");
       })
       .catch((error) => {
         toast.error(error.message);

@@ -3,8 +3,9 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Stack from "@mui/material/Stack";
-import { Grid, Typography } from "@mui/material";
+import { Grid, TextareaAutosize, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
@@ -13,14 +14,16 @@ import InputAdornment from "@mui/material/InputAdornment";
 import { db } from "../../firebase/config";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 
-export default function AddDriver({ closeEvent }) {
+export default function AddDriver() {
   const [nama, setNama] = React.useState("");
   const [kontak, setKontak] = useState(0);
   const [plat, setPlat] = React.useState("");
   const [gender, setGender] = useState("");
-  const [kendaraan, setKendaraan] = useState("");
+  const [kendaraan, setKendaraan] = React.useState("");
   const [rows, setRows] = useState([]);
   const empCollectionRef = collection(db, "driver");
+
+  const navigate = useNavigate();
 
   const chooseGender = [
     {
@@ -57,9 +60,13 @@ export default function AddDriver({ closeEvent }) {
     await addDoc(empCollectionRef, {
       nama: nama,
       kontak: Number(kontak),
+      kendaraan: kendaraan,
+      gender: gender,
+      plat: plat,
     });
     getUsers();
-    Swal.fire("Berhasil", "TErsimpan");
+    Swal.fire("Berhasil", "Data Driver Berhasil Tersimpan");
+    navigate("/driverlist");
   };
 
   const getUsers = async () => {
@@ -71,7 +78,7 @@ export default function AddDriver({ closeEvent }) {
     <section>
       <div className="order">
         <div className="judul">
-          <h4>Tambah Driver</h4>
+          <h4>TAMBAH DRIVER</h4>
         </div>
         <div className="card">
           <div className="main-card">
@@ -83,7 +90,8 @@ export default function AddDriver({ closeEvent }) {
                 <Grid item xs={12}>
                   <TextField
                     id="outlined-basic"
-                    label="nama"
+                    label="Nama Lengkap Driver"
+                    required
                     variant="outlined"
                     onChange={handleNamaChange}
                     value={nama}
@@ -93,8 +101,9 @@ export default function AddDriver({ closeEvent }) {
                 <Grid item xs={6}>
                   <TextField
                     id="outlined-basic"
-                    label="Jenis Kendaraan"
+                    label="Jenis Kendaraan Driver"
                     variant="outlined"
+                    required
                     onChange={handleKendaraanChange}
                     value={kendaraan}
                     sx={{ minWidth: "100%" }}
@@ -105,6 +114,7 @@ export default function AddDriver({ closeEvent }) {
                     id="outlined-basic"
                     select
                     label="Jenis Kelamin"
+                    required
                     variant="outlined"
                     onChange={handleGenderChange}
                     value={gender}
@@ -120,8 +130,9 @@ export default function AddDriver({ closeEvent }) {
                 <Grid item xs={6}>
                   <TextField
                     id="outlined-basic"
-                    label="kontak"
+                    label="Kontak/No. Handphone"
                     type="number"
+                    required
                     variant="outlined"
                     onChange={handleKontakChange}
                     value={kontak}
@@ -131,17 +142,32 @@ export default function AddDriver({ closeEvent }) {
                 <Grid item xs={6}>
                   <TextField
                     id="outlined-basic"
-                    label="plat"
+                    label="Plat Nomor Kendaraan"
+                    required
                     variant="outlined"
                     onChange={handlePlatChange}
                     value={plat}
                     sx={{ minWidth: "100%" }}
                   />
                 </Grid>
+                <Grid item xs={12} align="Center">
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Catatan"
+                    multiline
+                    rows={4}
+                    sx={{ minWidth: "100%" }}
+                  />
+                </Grid>
                 <Grid item xs={12}>
-                  <Typography variant="h5" align="center">
-                    <Button variant="contained" onClick={createUser}>
-                      Submit
+                  <Typography variant="h5" align="Right">
+                    <Button
+                      variant="contained"
+                      onClick={createUser}
+                      type="submit"
+                      style={{ marginTop: "10px", backgroundColor: "#08376b" }}
+                    >
+                      Daftarkan Driver
                     </Button>
                   </Typography>
                 </Grid>

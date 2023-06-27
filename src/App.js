@@ -1,7 +1,7 @@
 import React from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Switch } from "react-router-dom";
 import "./App.css";
 import { Header, Footer, Sidebar } from "./components";
 import {
@@ -27,10 +27,12 @@ function App() {
         <ToastContainer />
         <Sidebar>
           <Header />
-
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+
+            <Route path="/registrasi" element={<Registrasi />} />
+
+            <Route path="/" element={<Home />} />
             <Route path="/order" element={<Order />} />
             <Route path="/orderToday" element={<OrderToday />} />
             <Route path="/driver" element={<Driver />} />
@@ -41,9 +43,6 @@ function App() {
             <Route path="/processOrder" element={<ProcessOrder />} />
             <Route path="/processOrder" element={<EkstimasiWaktu />} />
             <Route path="/historyOrder" element={<HistoryOrder />} />
-
-            <Route path="/login" element={<Login />} />
-            <Route path="/registrasi" element={<Registrasi />} />
           </Routes>
 
           <Footer />

@@ -21,7 +21,7 @@ h5 {
 }
 .card {
   margin-top: 20px;
-
+  min-height: 65vh;
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;

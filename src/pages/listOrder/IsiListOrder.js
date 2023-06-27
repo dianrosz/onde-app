@@ -30,8 +30,8 @@ import { Autocomplete, TextField } from "@mui/material";
 export default function IsiListOrder() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [rows, setRows] = useState([]);
-  const empCollectionRef = collection(db, "driver");
+  const [cards, setCards] = useState([]);
+  const empCollectionRef = collection(db, "pemesanan");
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -42,7 +42,7 @@ export default function IsiListOrder() {
 
   const getUsers = async () => {
     const data = await getDocs(empCollectionRef);
-    setRows(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    setCards(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
   const handleChangePage = (event, newPage) => {
@@ -79,9 +79,9 @@ export default function IsiListOrder() {
 
   const filterData = (v) => {
     if (v) {
-      setRows([v]);
+      setCards([v]);
     } else {
-      setRows([]);
+      setCards([]);
       getUsers();
     }
   };
@@ -93,10 +93,10 @@ export default function IsiListOrder() {
         <Autocomplete
           disablePortal
           id="combo-box-demo"
-          options={rows}
+          options={cards}
           sx={{ width: 300 }}
           onChange={(e, v) => filterData(v)}
-          getOptionLabel={(rows) => rows.nama || ""}
+          getOptionLabel={(rows) => rows.namaPemesan || ""}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -110,31 +110,64 @@ export default function IsiListOrder() {
           component="div"
           sx={{ flexGrow: 1 }}
         ></Typography>
-        <Button size="small" variant="contained" href="/addDriver">
+        <Button
+          size="small"
+          variant="contained"
+          type="submit"
+          style={{ backgroundColor: "#08376b" }}
+        >
           Pilih Kategori
         </Button>
       </Stack>
       <Box height={10} />
-      <Card sx={{ minWidth: 450, marginTop: 3 }}>
-        <CardContent>
-          <Typography gutterBottom variant="h7" component="div">
-            BELANJA
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            No. Transaksi: #OND-110220230001 Cusitomer1 - 087154326789 Lokasi
-            Jemput: SD Negeri Ubo - Ubo Lokasi Antar: Tanah Tinggi Waktu
-            Pemesanan: 11/02/2023 - 40 menit yang lalu
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button className="button-one" size="small">
-            Terima
-          </Button>
-          <Button className="button-second" size="small">
-            Tolak
-          </Button>
-        </CardActions>
-      </Card>
+      {cards.map((card) => {
+        return (
+          <Card sx={{ minWidth: 450, marginTop: 3 }}>
+            <CardContent>
+              <h5 class="card-title" key={card.id}>
+                {card.kategoriLayanan}
+              </h5>
+              <p class="card-text" key={card.id}>
+                ID Transaksi : {card.id}
+              </p>
+              <p class="card-text" key={card.id}>
+                Nama Pemesan : {card.namaPemesan}
+              </p>
+              <p class="card-text" key={card.id}>
+                No. Handphone : {card.kontakPemesan}
+              </p>
+              <p class="card-text" key={card.id}>
+                Lokasi Pengantaran : {card.lokasiPengantaran}
+              </p>
+              <p class="card-text" key={card.id}>
+                Lokasi Penjemputan : {card.lokasiPenjemputan}
+              </p>
+              <p class="card-text" key={card.id}>
+                Pesanan : {card.pesanan}
+              </p>
+            </CardContent>
+            <CardActions sx={{ marginLeft: 1, marginBottom: 1 }}>
+              <Button
+                size="small"
+                variant="contained"
+                type="submit"
+                style={{ backgroundColor: "#08376b" }}
+              >
+                Terima
+              </Button>
+
+              <Button
+                size="small"
+                variant="contained"
+                type="submit"
+                style={{ backgroundColor: "#35C0ED" }}
+              >
+                Tolak
+              </Button>
+            </CardActions>
+          </Card>
+        );
+      })}
     </>
   );
 }

@@ -108,7 +108,12 @@ export default function DriverList() {
             component="div"
             sx={{ flexGrow: 1 }}
           ></Typography>
-          <Button size="small" variant="contained" href="/addDriver">
+          <Button
+            size="small"
+            variant="contained"
+            href="/addDriver"
+            style={{ backgroundColor: "#08376b" }}
+          >
             Tambah Driver +
           </Button>
         </Stack>

@@ -24,11 +24,11 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        toast.success("Alhamdullilah Login juga akhirnya......");
+        toast.success("Login Berhasil");
         navigate("/");
       })
       .catch((error) => {
-        toast.error("Akun yang kamu masukan salaahh :( ");
+        toast.error("Akun yang masuk salah atau tidak terdaftar");
       });
   };
 

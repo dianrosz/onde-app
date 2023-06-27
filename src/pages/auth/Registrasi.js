@@ -21,13 +21,13 @@ const Registrasi = () => {
   const registerUser = (e) => {
     e.preventDefault();
     if (password !== cPassword) {
-      toast.error("Password ga sama woy");
+      toast.error("Password yang anda masukan tidak sama");
     } else {
       createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const user = userCredential.user;
           console.log(user);
-          toast.success("registrasi berhasil wooyyy! seeneng gaa ssiii");
+          toast.success("Registrasi Berhasil dilakukan");
           navigate("/login");
         })
         .catch((error) => {
@@ -44,7 +44,7 @@ const Registrasi = () => {
             <div className="combate-regist">
               <div className="combate-satu">
                 <div className="headTitle">
-                  <h4>DAFTAR AKUN</h4>
+                  <h4>REGISTRASI</h4>
                 </div>
                 <Grid container style={{ justifyContent: "center" }}>
                   <Grid xs="8">
@@ -76,7 +76,7 @@ const Registrasi = () => {
                       <TextField
                         variant="outlined"
                         size="small"
-                        label="Password"
+                        label="Konfirmasi Password"
                         style={{ margin: "10px" }}
                         type="password"
                         name="password"
