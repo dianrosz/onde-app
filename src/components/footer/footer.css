@@ -8,8 +8,9 @@
   box-shadow: 3px 0 3px 0 rgba(0, 0, 0, 0.2);
 }
 .bottom {
-  color: black;
+  color: #08376b;
   padding: 2px;
+  font-size: small;
 }
 .bottom p {
   padding-top: 2px;
