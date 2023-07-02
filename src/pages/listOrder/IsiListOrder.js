@@ -96,7 +96,7 @@ export default function IsiListOrder() {
           options={cards}
           sx={{ width: 300 }}
           onChange={(e, v) => filterData(v)}
-          getOptionLabel={(rows) => rows.namaPemesan || ""}
+          getOptionLabel={(cards) => cards.kategoriLayanan || ""}
           renderInput={(params) => (
             <TextField
               {...params}

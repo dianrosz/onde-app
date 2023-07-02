@@ -28,7 +28,7 @@ const Login = () => {
         navigate("/");
       })
       .catch((error) => {
-        toast.error("Akun yang masuk salah atau tidak terdaftar");
+        toast.error(error.message);
       });
   };
 
@@ -50,12 +50,12 @@ const Login = () => {
                     <TextField
                       variant="outlined"
                       size="small"
+                      type="email"
                       label="Email"
                       style={{ margin: "15px" }}
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       name="email"
-                      type="email"
                       fullWidth
                       required
                     />
@@ -82,10 +82,6 @@ const Login = () => {
                       LOGIN
                     </Button>
                   </form>
-                  <p>
-                    Belum punya Akun?
-                    <Link to="/registrasi"> Daftar Sekarang</Link>
-                  </p>
                 </Grid>
               </Grid>
             </div>

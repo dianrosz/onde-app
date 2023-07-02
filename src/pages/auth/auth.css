@@ -1,5 +1,6 @@
 .login {
   margin: 20px;
+  min-height: 73vh;
   align-items: center;
   text-align: center;
 }

@@ -27,7 +27,7 @@ const Registrasi = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           console.log(user);
-          toast.success("Registrasi Berhasil dilakukan");
+          toast.success("Registrasi Berhasil");
           navigate("/login");
         })
         .catch((error) => {

@@ -66,7 +66,7 @@ export default function AddDriver() {
     });
     getUsers();
     Swal.fire("Berhasil", "Data Driver Berhasil Tersimpan");
-    navigate("/driverlist");
+    navigate("/driver");
   };
 
   const getUsers = async () => {

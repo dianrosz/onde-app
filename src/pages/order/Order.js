@@ -30,12 +30,12 @@ const Order = () => {
       label: "Antar Jemput",
     },
     {
-      Value: "Pesan Makanan",
-      label: "Pesan Makanan",
-    },
-    {
       value: "Antar Kirim Barang",
       label: "Antar Kirim Barang",
+    },
+    {
+      value: "Pesan Makanan",
+      label: "Pesan Makanan",
     },
   ];
 

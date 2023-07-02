@@ -13,7 +13,7 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         toast.success("Logout Berhasil ");
-        navigate("/");
+        navigate("/login");
       })
       .catch((error) => {
         toast.error(error.message);
@@ -23,8 +23,8 @@ const Header = () => {
     <div className="header">
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-          <span>
-            <NavLink to="/login" onClick={logoutUser}>
+          <span align="right">
+            <NavLink to="/login" onClick={logoutUser} align="right">
               LOGOUT
             </NavLink>
           </span>

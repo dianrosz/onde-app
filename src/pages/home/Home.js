@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { Button } from "@mui/material";
 import { useState } from "react";
@@ -7,8 +8,8 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 
 const Home = () => {
   return (
-    <section>
-      <p>HOME </p>
+    <section style={{ height: "75vh", alignItems: "center" }}>
+      <p style={{ alignItems: "center" }}>TAMPILAN BERANDA </p>
     </section>
   );
 };
