@@ -98,21 +98,6 @@ export default function IsiListOrder() {
     <>
       <Box height={10} />
       <Stack direction="row" spacing={2} className="my-2 mb-2 m-2">
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          options={cards}
-          sx={{ width: 300 }}
-          onChange={(e, v) => filterData(v)}
-          getOptionLabel={(cards) => cards.kategoriLayanan || ""}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              size="small"
-              label="Search Daftar Pemesanan"
-            />
-          )}
-        />
         <Typography
           variant="h6"
           component="div"
