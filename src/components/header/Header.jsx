@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./header.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import { signOut } from "firebase/auth";
+import { signOut, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { toast } from "react-toastify";
+import { Typography, Grid } from "@mui/material";
+import { FaUserCircle } from "react-icons/fa";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -23,11 +25,13 @@ const Header = () => {
     <div className="header">
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-          <span align="right">
-            <NavLink to="/login" onClick={logoutUser} align="right">
-              LOGOUT
-            </NavLink>
-          </span>
+          <Grid style={{ textAlign: "right" }}>
+            <span className="logout">
+              <NavLink to="/login" onClick={logoutUser}>
+                LOGOUT
+              </NavLink>
+            </span>
+          </Grid>
         </div>
       </nav>
     </div>

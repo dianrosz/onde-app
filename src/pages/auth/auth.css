@@ -1,8 +1,15 @@
 .login {
-  margin: 20px;
-  min-height: 73vh;
+  display: flex;
+  justify-content: center;
   align-items: center;
-  text-align: center;
+  height: 100vh;
+  background-color: #c7eeff;
+}
+.card-login {
+  width: 600px;
+  height: 363px;
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Efek box shadow */
 }
 .registrasi {
   margin: 50px;
@@ -10,6 +17,9 @@
   text-align: center;
 }
 .combate-login {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   display: grid;
   grid-template-columns: 2fr 1fr;
 }
@@ -28,9 +38,8 @@
   background-color: #c7eeff;
 }
 .login-img {
-  width: 70%;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  max-width: fit-content;
 }
 .headTitle {
   color: #08376b;
@@ -67,4 +76,31 @@
 }
 Link {
   cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .container {
+    height: auto; /* Mengubah tinggi container menjadi otomatis */
+  }
+
+  .card-login {
+    width: 70%; /* Mengubah lebar card menjadi 80% dari lebar layar */
+    height: auto; /* Mengubah tinggi card menjadi otomatis */
+    padding: 10px;
+    padding-bottom: 25px;
+  }
+  .login-img {
+    display: none;
+  }
+  .combate-login {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .headTitle {
+    margin: auto;
+    padding: auto;
+  }
 }

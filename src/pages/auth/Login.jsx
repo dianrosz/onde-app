@@ -9,8 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
-import logoblue from "../../assets/logoblue.png";
-import login from "../../assets/login.png";
+import loginIMG from "../../assets/loginIMG.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -35,7 +34,7 @@ const Login = () => {
   return (
     <section>
       <div className="login">
-        <div className="card">
+        <Grid className="card-login">
           <div className="combate-login">
             <div className="combate-satu">
               <div className="headTitle">
@@ -86,11 +85,10 @@ const Login = () => {
               </Grid>
             </div>
             <div className="regist-dua">
-              <img src={logoblue} alt="login-image" className="login-img" />
-              <img src={login} alt="login-image" className="login-img" />
+              <img src={loginIMG} alt="login-image" className="login-img" />
             </div>
           </div>
-        </div>
+        </Grid>
       </div>
     </section>
   );

@@ -18,6 +18,7 @@ import {
   collection,
   getDocs,
   addDoc,
+  onSnapshot,
   updateDoc,
   deleteDoc,
   doc,
@@ -25,33 +26,15 @@ import {
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
-import { Autocomplete, TextField } from "@mui/material";
+import { Grid } from "@mui/material";
+import { Autocomplete, TextField, MenuItem } from "@mui/material";
 
 export default function HistoryOrderList() {
   return (
     <>
-      <Box height={10} />
-      <Stack direction="row" spacing={2} className="my-2 mb-2 m-2">
-        <Autocomplete
-          disablePortal
-          id="combo-box-demo"
-          sx={{ width: 300 }}
-          getOptionLabel={(cards) => cards.kategoriLayanan || ""}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              size="small"
-              label="Search Riwayat Pemesanan"
-            />
-          )}
-        />
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{ flexGrow: 1 }}
-        ></Typography>
-      </Stack>
-      <Box height={10} />
+      <div>
+        <h3>JUST HISTORY</h3>
+      </div>
     </>
   );
 }

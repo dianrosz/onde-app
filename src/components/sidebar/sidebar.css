@@ -39,9 +39,8 @@
 .active {
   background: #f5f5f5;
   color: #35c0ed;
-  
 }
 .icon,
 .link_text {
-  font-size: 12px;
+  font-size: 13px;
 }

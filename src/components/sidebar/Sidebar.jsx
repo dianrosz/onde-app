@@ -27,6 +27,7 @@ const Sidebar = ({ children }) => {
       name: "Pemesanan",
       icon: <BsFillBagPlusFill size={18} />,
     },
+
     {
       path: "/listOrder",
       name: "Daftar Pemesanan",
@@ -50,6 +51,11 @@ const Sidebar = ({ children }) => {
     {
       path: "/Driver",
       name: "Daftar Driver",
+      icon: <BsFillPersonFill size={18} />,
+    },
+    {
+      path: "/Admin",
+      name: "Daftar Admin",
       icon: <BsFillPersonFill size={18} />,
     },
   ];

@@ -26,6 +26,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Autocomplete, TextField } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 export default function IsiListOrder() {
   const [page, setPage] = React.useState(0);
@@ -35,6 +36,36 @@ export default function IsiListOrder() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const navigate = useNavigate();
+
+  const accPemesanan = async () => {
+    getUsers();
+    Swal.fire("Konfirmasi", "Konfirmasi Pesanan Terlebih Dahulu");
+    navigate("/orderConfirm");
+  };
+
+  const rejectPemesanan = async () => {
+    getUsers();
+    Swal.fire({
+      title: "Kamu Yakin, Menolak Pesanan?",
+      icon: "Peringatan",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Ya, Tolak",
+    }).then((result) => {
+      if (result.value) {
+        deleteApi();
+      }
+    });
+  };
+
+  const deleteApi = async () => {
+    Swal.fire("Berhasil!", "Pesanan Sudah di Tolak");
+    getUsers();
+    navigate("/historyOrder");
+  };
 
   useEffect(() => {
     getUsers();
@@ -52,29 +83,6 @@ export default function IsiListOrder() {
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
-  };
-
-  const deleteDriver = (id) => {
-    Swal.fire({
-      title: "Kamu Yakin?",
-      text: "Anda tidak akan dapat mengembalikan ini!",
-      icon: "Peringatan",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Ya, Hapus",
-    }).then((result) => {
-      if (result.value) {
-        deleteApi(id);
-      }
-    });
-  };
-
-  const deleteApi = async (id) => {
-    const userDoc = doc(db, "driver", id);
-    await deleteDoc(userDoc);
-    Swal.fire("Terhapus!", "Filemu Berhasil Terhapus!", "Berhasil");
-    getUsers();
   };
 
   const filterData = (v) => {
@@ -125,25 +133,25 @@ export default function IsiListOrder() {
           <Card sx={{ minWidth: 450, marginTop: 3 }}>
             <CardContent>
               <h5 class="card-title" key={card.id}>
-                {card.kategoriLayanan}
+                {card.layanan}
               </h5>
               <p class="card-text" key={card.id}>
                 ID Transaksi : {card.id}
               </p>
               <p class="card-text" key={card.id}>
-                Nama Pemesan : {card.namaPemesan}
+                Nama Pemesan : {card.pemesan}
               </p>
               <p class="card-text" key={card.id}>
-                No. Handphone : {card.kontakPemesan}
+                No. Handphone : {card.handphone}
               </p>
               <p class="card-text" key={card.id}>
-                Lokasi Pengantaran : {card.lokasiPengantaran}
+                Lokasi Pengantaran : {card.pengantaran}
               </p>
               <p class="card-text" key={card.id}>
-                Lokasi Penjemputan : {card.lokasiPenjemputan}
+                Lokasi Pengambilan : {card.pengambilan}
               </p>
               <p class="card-text" key={card.id}>
-                Pesanan : {card.pesanan}
+                Catatan : {card.Catatan}
               </p>
             </CardContent>
             <CardActions sx={{ marginLeft: 1, marginBottom: 1 }}>
@@ -152,6 +160,7 @@ export default function IsiListOrder() {
                 variant="contained"
                 type="submit"
                 style={{ backgroundColor: "#08376b" }}
+                onClick={accPemesanan}
               >
                 Terima
               </Button>
@@ -161,6 +170,7 @@ export default function IsiListOrder() {
                 variant="contained"
                 type="submit"
                 style={{ backgroundColor: "#35C0ED" }}
+                onClick={rejectPemesanan}
               >
                 Tolak
               </Button>
