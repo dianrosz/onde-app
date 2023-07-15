@@ -14,7 +14,7 @@ const Header = () => {
   const logoutUser = () => {
     signOut(auth)
       .then(() => {
-        toast.success("Logout Berhasil ");
+        toast.success("Anda telah keluar");
         navigate("/login");
       })
       .catch((error) => {
@@ -28,7 +28,7 @@ const Header = () => {
           <Grid style={{ textAlign: "right" }}>
             <span className="logout">
               <NavLink to="/login" onClick={logoutUser}>
-                LOGOUT
+                Keluar
               </NavLink>
             </span>
           </Grid>
