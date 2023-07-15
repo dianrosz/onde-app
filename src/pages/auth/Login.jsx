@@ -75,7 +75,7 @@ const Login = () => {
                       style={{ margin: "15px" }}
                       onClick={loginUser}
                       fullWidth
-                      color="primary"
+                      color="#DE834E"
                       type="submit"
                     >
                       LOGIN

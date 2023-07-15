@@ -41,7 +41,7 @@ export default function ProcessOrderList() {
             sx={{ width: 300 }}
             getOptionLabel={(rows) => rows.nama || ""}
             renderInput={(params) => (
-              <TextField {...params} size="small" label="Search Pemesanan" />
+              <TextField {...params} size="small" label="Cari pemesanan" />
             )}
           />
           <Typography
@@ -55,7 +55,7 @@ export default function ProcessOrderList() {
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                <TableCell align="left">No. Transaksi</TableCell>
+                <TableCell align="left">ID Transaksi</TableCell>
                 <TableCell align="left">Nama Pemesan</TableCell>
                 <TableCell align="left">Kategori Layanan</TableCell>
                 <TableCell align="left">Status Pemesanan</TableCell>

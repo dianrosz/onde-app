@@ -12,7 +12,7 @@ const Home = () => {
     <Sidebar>
       <Header />
       <section style={{ height: "75vh", alignItems: "center" }}>
-        <p style={{ alignItems: "center" }}>TAMPILAN BERANDA </p>
+        <p style={{ alignItems: "center" }}>Beranda</p>
       </section>
       <Footer />
     </Sidebar>

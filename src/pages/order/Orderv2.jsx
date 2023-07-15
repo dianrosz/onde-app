@@ -47,7 +47,7 @@ export default function Orderv2() {
       <Grid item xs={12}>
         <TextField
           id="outlined-multiline-static"
-          label="Salin Format Pesanan Disini"
+          label="Salin format pesanan di sini"
           multiline
           rows={10}
           variant="outlined"

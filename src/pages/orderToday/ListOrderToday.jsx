@@ -44,7 +44,7 @@ export default function ListOrderToday() {
               <TextField
                 {...params}
                 size="small"
-                label="Search Pemesanan Hari ini"
+                label="Cari pemesanan hari ini"
               />
             )}
           />
@@ -59,7 +59,7 @@ export default function ListOrderToday() {
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                <TableCell align="left">No. Transaksi</TableCell>
+                <TableCell align="left">ID Transaksi</TableCell>
                 <TableCell align="left">Nama Pemesan</TableCell>
                 <TableCell align="left">Kategori Layanan</TableCell>
                 <TableCell align="left">Status Pemesanan</TableCell>

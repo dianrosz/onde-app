@@ -57,13 +57,13 @@ export default function DriverList() {
 
   const deleteDriver = (id) => {
     Swal.fire({
-      title: "Kamu Yakin?",
-      text: "Anda tidak akan dapat mengembalikan ini!",
+      title: "Hapus driver?",
+      text: "Data driver akan terhapus permanen",
       icon: "Peringatan",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Ya, Hapus",
+      confirmButtonText: "Hapus driver",
     }).then((result) => {
       if (result.value) {
         deleteApi(id);
@@ -100,7 +100,7 @@ export default function DriverList() {
             onChange={(e, v) => filterData(v)}
             getOptionLabel={(rows) => rows.nama || ""}
             renderInput={(params) => (
-              <TextField {...params} size="small" label="Search Driver" />
+              <TextField {...params} size="small" label="Cari Driver" />
             )}
           />
           <Typography
@@ -112,7 +112,7 @@ export default function DriverList() {
             size="small"
             variant="contained"
             href="/addDriver"
-            style={{ backgroundColor: "#08376b" }}
+            style={{ backgroundColor: "#DE834E" }}
           >
             Tambah Driver +
           </Button>
@@ -122,7 +122,7 @@ export default function DriverList() {
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                <TableCell align="left">Nama</TableCell>
+                <TableCell align="left">Nama Driver</TableCell>
                 <TableCell align="left">Jenis Kendaraan</TableCell>
                 <TableCell align="left">No. Plat Kendaraan</TableCell>
                 <TableCell align="left">Kontak</TableCell>

@@ -175,7 +175,7 @@ export default function AddDriver() {
                         type="submit"
                         style={{
                           marginTop: "10px",
-                          backgroundColor: "#08376b",
+                          backgroundColor: "#DE834E",
                         }}
                       >
                         Daftarkan Driver

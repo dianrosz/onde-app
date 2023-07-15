@@ -52,14 +52,14 @@ export default function IsiOrderConfirm() {
 
   const createHarga = async () => {
     if (selectedValue === "") {
-      toast.error("Lengkapi Pilih Driver terlebih dahulu");
+      toast.error("Pilih Driver terlebih dahulu");
     } else {
       await addDoc(empCollection, {
         harga: harga,
         nama: selectedValue,
       });
       getUsers();
-      Swal.fire("Berhasil", "Pesanan Berhasil ditambahkan");
+      Swal.fire("Berhasil", "Pesanan berhasil ditambahkan");
       navigate("/processOrder");
     }
   };
@@ -83,8 +83,8 @@ export default function IsiOrderConfirm() {
                 value={card.layanan}
                 id="outlined-read-only-input"
                 sx={{ minWidth: "100%" }}
-                label="Kateori Layanan"
-                defaultValue="Kateori Layanan"
+                label="Kategori Layanan"
+                defaultValue="Kategori Layanan"
                 InputProps={{
                   readOnly: true,
                 }}
@@ -198,7 +198,7 @@ export default function IsiOrderConfirm() {
                 <Button
                   variant="contained"
                   type="submit"
-                  style={{ marginTop: "10px", backgroundColor: "#08376b" }}
+                  style={{ marginTop: "10px", backgroundColor: "#DE834E" }}
                   onClick={createHarga}
                 >
                   Buat Pemesanan

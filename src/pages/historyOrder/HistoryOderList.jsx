@@ -33,7 +33,7 @@ export default function HistoryOrderList() {
   return (
     <>
       <div>
-        <h3>JUST HISTORY</h3>
+        <h3>Riwayat Pemesanan</h3>
       </div>
     </>
   );

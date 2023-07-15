@@ -41,19 +41,19 @@ export default function IsiListOrder() {
 
   const accPemesanan = async () => {
     getUsers();
-    Swal.fire("Konfirmasi", "Konfirmasi Pesanan Terlebih Dahulu");
+    Swal.fire("Konfirmasi", "Konfirmasi pesanan terlebih dahulu!");
     navigate("/orderConfirm");
   };
 
   const rejectPemesanan = async () => {
     getUsers();
     Swal.fire({
-      title: "Kamu Yakin, Menolak Pesanan?",
+      title: "Anda yakin, ingin menolak pesanan?",
       icon: "Peringatan",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
+      confirmButtonColor: "#DE834E",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Ya, Tolak",
+      confirmButtonText: "Tolak",
     }).then((result) => {
       if (result.value) {
         deleteApi();
@@ -62,7 +62,7 @@ export default function IsiListOrder() {
   };
 
   const deleteApi = async () => {
-    Swal.fire("Berhasil!", "Pesanan Sudah di Tolak");
+    Swal.fire("Berhasil!", "Pesanan ditolak");
     getUsers();
     navigate("/historyOrder");
   };
@@ -97,25 +97,9 @@ export default function IsiListOrder() {
   return (
     <>
       <Box height={10} />
-      <Stack direction="row" spacing={2} className="my-2 mb-2 m-2">
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{ flexGrow: 1 }}
-        ></Typography>
-        <Button
-          size="small"
-          variant="contained"
-          type="submit"
-          style={{ backgroundColor: "#08376b" }}
-        >
-          Pilih Kategori
-        </Button>
-      </Stack>
-      <Box height={10} />
       {cards.map((card) => {
         return (
-          <Card sx={{ minWidth: 450, marginTop: 3 }}>
+          <Card sx={{ minWidth: 450, marginTop: 2 }}>
             <CardContent>
               <h5 class="card-title" key={card.id}>
                 {card.layanan}
@@ -144,7 +128,7 @@ export default function IsiListOrder() {
                 size="small"
                 variant="contained"
                 type="submit"
-                style={{ backgroundColor: "#08376b" }}
+                style={{ backgroundColor: "#DE834E" }}
                 onClick={accPemesanan}
               >
                 Terima
@@ -154,7 +138,7 @@ export default function IsiListOrder() {
                 size="small"
                 variant="contained"
                 type="submit"
-                style={{ backgroundColor: "#35C0ED" }}
+                style={{ backgroundColor: "#A61111" }}
                 onClick={rejectPemesanan}
               >
                 Tolak

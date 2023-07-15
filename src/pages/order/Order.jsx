@@ -27,7 +27,7 @@ const Order = () => {
           <div className="card">
             <div className="main-card">
               <div className="card-header">
-                <h5>Salin Pemesanan Disini</h5>
+                <h5>Salin pemesanan di sini</h5>
               </div>
               <div className="card-body">
                 <Orderv2 />
