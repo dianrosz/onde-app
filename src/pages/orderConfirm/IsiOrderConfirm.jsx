@@ -14,7 +14,7 @@ import { addDoc, onSnapshot } from "firebase/firestore";
 
 export default function IsiOrderConfirm() {
   const [cards, setCards] = useState([]);
-  const [harga, setHarga] = useState(0);
+  const [harga, setHarga] = useState();
   const [selectedValue, setSelectedValue] = useState("");
   const [options, setOptions] = useState([]);
   const empCollectionRef = collection(db, "pemesanan");
@@ -164,41 +164,36 @@ export default function IsiOrderConfirm() {
               />
             </Grid>
 
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <TextField
-                id="outlined-basic"
+                id="outlined-number"
                 label="Konfirmasi Harga"
-                required
-                variant="outlined"
+                type="number"
                 onChange={handleHargaChange}
                 value={harga}
                 sx={{ minWidth: "100%" }}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={6}>
               <TextField
                 id="outlined-basic"
-                select
+                type="date"
+                placeholder="Tanggal Transaksi"
                 required
-                label="Pilih Driver"
                 variant="outlined"
-                value={selectedValue}
-                onChange={handleSelectChange}
                 sx={{ minWidth: "100%" }}
-              >
-                {options.map((option) => (
-                  <MenuItem key={option.value} value={option.value}>
-                    {option.label}
-                  </MenuItem>
-                ))}
-              </TextField>
+              />
             </Grid>
             <Grid item xs={12}>
               <Typography variant="h5" align="right">
                 <Button
                   variant="contained"
                   type="submit"
-                  style={{ marginTop: "10px", backgroundColor: "#DE834E" }}
+                  style={{
+                    marginTop: "10px",
+                    backgroundColor: "#DE834E",
+                    marginBottom: "10px",
+                  }}
                   onClick={createHarga}
                 >
                   Buat Pemesanan

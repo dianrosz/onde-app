@@ -25,9 +25,13 @@ const Header = () => {
     <div className="header">
       <nav class="navbar navbar-light bg-light">
         <div class="container-fluid">
-          <Grid style={{ textAlign: "right" }}>
+          <Grid>
             <span className="logout">
-              <NavLink to="/login" onClick={logoutUser}>
+              <NavLink
+                to="/login"
+                style={{ color: "#A3423B" }}
+                onClick={logoutUser}
+              >
                 Keluar
               </NavLink>
             </span>

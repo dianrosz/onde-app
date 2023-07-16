@@ -59,11 +59,13 @@ export default function ProcessOrderList() {
                 <TableCell align="left">Nama Pemesan</TableCell>
                 <TableCell align="left">Kategori Layanan</TableCell>
                 <TableCell align="left">Status Pemesanan</TableCell>
-                <TableCell align="left">Tautan Progress</TableCell>
+                <TableCell align="left">Tanggal Pesanan</TableCell>
+                <TableCell align="left">Genarate Link Progress</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               <TableRow hover role="checkbox" tabIndex={-1}>
+                <TableCell align="left"></TableCell>
                 <TableCell align="left"></TableCell>
                 <TableCell align="left"></TableCell>
                 <TableCell align="left"></TableCell>

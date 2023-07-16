@@ -64,7 +64,7 @@ export default function ListOrderToday() {
                 <TableCell align="left">Kategori Layanan</TableCell>
                 <TableCell align="left">Status Pemesanan</TableCell>
                 <TableCell align="left">Driver</TableCell>
-                <TableCell align="left">Waktu Transaksi</TableCell>
+                <TableCell align="left">Tanggal Transaksi</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

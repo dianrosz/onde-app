@@ -5,7 +5,7 @@ import React from "react";
 import { Grid, TextField, Button } from "@mui/material";
 import "./auth.css";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
@@ -72,10 +72,9 @@ const Login = () => {
                     />
                     <Button
                       variant="contained"
-                      style={{ margin: "15px" }}
+                      style={{ margin: "15px", backgroundColor: "#DE834E" }}
                       onClick={loginUser}
                       fullWidth
-                      color="#DE834E"
                       type="submit"
                     >
                       LOGIN
