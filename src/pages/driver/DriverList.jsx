@@ -61,8 +61,8 @@ export default function DriverList() {
       text: "Data driver akan terhapus permanen",
       icon: "Peringatan",
       showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
+      confirmButtonColor: "#de834e",
+      cancelButtonColor: "#A61111",
       confirmButtonText: "Hapus driver",
     }).then((result) => {
       if (result.value) {
@@ -156,7 +156,7 @@ export default function DriverList() {
                           <EditIcon
                             style={{
                               fontSize: "20px",
-                              color: "blue",
+                              color: "#de834e",
                               cursor: "pointer",
                             }}
                             className="cursor-pointer"
@@ -164,7 +164,7 @@ export default function DriverList() {
                           <DeleteIcon
                             style={{
                               fontSize: "20px",
-                              color: "darkred",
+                              color: "#A61111",
                               cursor: "pointer",
                             }}
                             onClick={() => deleteDriver(row.id)}

@@ -18,7 +18,7 @@ import { Sidebar, Header, Footer } from "../../components";
 
 export default function AddDriver() {
   const [nama, setNama] = React.useState("");
-  const [kontak, setKontak] = useState(0);
+  const [kontak, setKontak] = useState();
   const [plat, setPlat] = React.useState("");
   const [gender, setGender] = useState("");
   const [kendaraan, setKendaraan] = React.useState("");
@@ -35,6 +35,17 @@ export default function AddDriver() {
     {
       value: "Perempuan",
       label: "Perempuan",
+    },
+  ];
+
+  const chooseKendaraan = [
+    {
+      value: "Mobil",
+      label: "Mobil",
+    },
+    {
+      value: "Motor",
+      label: "Motor",
     },
   ];
 
@@ -59,7 +70,7 @@ export default function AddDriver() {
   };
 
   const createUser = async () => {
-    if (nama === "") {
+    if (!nama || !kontak || !kendaraan || !gender || !plat) {
       toast.error("Lengkapi data terlebih dahulu");
     } else {
       await addDoc(empCollectionRef, {
@@ -70,7 +81,11 @@ export default function AddDriver() {
         plat: plat,
       });
       getUsers();
-      Swal.fire("Berhasil", "Data Driver Berhasil Tersimpan");
+      Swal.fire({
+        title: "Berhasil",
+        text: "Data Driver Berhasil Tersimpan",
+        confirmButtonColor: "#de834e",
+      });
       navigate("/driver");
     }
   };
@@ -111,11 +126,18 @@ export default function AddDriver() {
                       id="outlined-basic"
                       label="Jenis Kendaraan Driver"
                       variant="outlined"
+                      select
                       required
                       onChange={handleKendaraanChange}
                       value={kendaraan}
                       sx={{ minWidth: "100%" }}
-                    />
+                    >
+                      {chooseKendaraan.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
                   </Grid>
                   <Grid item xs={6}>
                     <TextField

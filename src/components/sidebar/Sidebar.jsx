@@ -7,6 +7,7 @@ import {
   BsBagCheckFill,
   BsFillBookmarksFill,
   BsFillPersonFill,
+  BsFillPeopleFill,
 } from "react-icons/bs";
 import { FaBars } from "react-icons/fa";
 import { AiFillHome } from "react-icons/ai";
@@ -56,7 +57,7 @@ const Sidebar = ({ children }) => {
     {
       path: "/Admin",
       name: "Daftar Admin",
-      icon: <BsFillPersonFill size={18} />,
+      icon: <BsFillPeopleFill size={18} />,
     },
   ];
   return (
