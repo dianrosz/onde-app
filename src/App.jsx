@@ -12,7 +12,7 @@ import {
   ListOrder,
   OrderToday,
   ListOrderToday,
-  EkstimasiWaktu,
+  EstimasiWaktu,
   ProcessOrder,
   ProcessOrderList,
   HistoryOrder,
@@ -49,7 +49,7 @@ function App() {
           <Route path="/isilistOrder" element={<IsiListOrder />} />
           <Route path="/processOrder" element={<ProcessOrder />} />
           <Route path="/processOrder" element={<ProcessOrderList />} />
-          <Route path="/processOrder" element={<EkstimasiWaktu />} />
+          <Route path="/processOrder" element={<EstimasiWaktu />} />
           <Route path="/historyOrder" element={<HistoryOrder />} />
           <Route path="/historyOrder" element={<HistoryOrderList />} />
           <Route path="/orderVer2" element={<Orderv2 />} />

@@ -11,7 +11,7 @@ export { default as ListOrder } from "./listOrder/ListOrder";
 export { default as IsiListOrder } from "./listOrder/IsiListOrder";
 export { default as ProcessOrder } from "./processOrder/ProcessOrder";
 export { default as ProcessOrderList } from "./processOrder/ProcessOrderList";
-export { default as EkstimasiWaktu } from "./listOrder/EkstimasiWaktu";
+export { default as EstimasiWaktu } from "./listOrder/EstimasiWaktu";
 export { default as HistoryOrder } from "./historyOrder/HistoryOrder";
 export { default as HistoryOrderList } from "./historyOrder/HistoryOderList";
 export { default as Login } from "./auth/Login";

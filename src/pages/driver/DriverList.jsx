@@ -57,13 +57,13 @@ export default function DriverList() {
 
   const deleteDriver = (id) => {
     Swal.fire({
-      title: "Hapus driver?",
-      text: "Data driver akan terhapus permanen",
+      title: "Hapus Driver?",
+      text: "Data Driver akan terhapus permanen",
       icon: "Peringatan",
       showCancelButton: true,
       confirmButtonColor: "#de834e",
       cancelButtonColor: "#A61111",
-      confirmButtonText: "Hapus driver",
+      confirmButtonText: "Hapus Driver",
     }).then((result) => {
       if (result.value) {
         deleteApi(id);
@@ -74,7 +74,7 @@ export default function DriverList() {
   const deleteApi = async (id) => {
     const userDoc = doc(db, "driver", id);
     await deleteDoc(userDoc);
-    Swal.fire("Terhapus!", "Filemu Berhasil Terhapus!", "Berhasil");
+    Swal.fire("Terhapus!", "Data terhapus!", "Berhasil");
     getUsers();
   };
 
@@ -114,7 +114,7 @@ export default function DriverList() {
             href="/addDriver"
             style={{ backgroundColor: "#DE834E" }}
           >
-            Tambah Driver +
+           + Tambah Driver
           </Button>
         </Stack>
         <Box height={10} />
@@ -155,7 +155,7 @@ export default function DriverList() {
                         <Stack spacing={2} direction="row">
                           <EditIcon
                             style={{
-                              fontSize: "20px",
+                              fontSize: "18px",
                               color: "#de834e",
                               cursor: "pointer",
                             }}
@@ -163,7 +163,7 @@ export default function DriverList() {
                           />
                           <DeleteIcon
                             style={{
-                              fontSize: "20px",
+                              fontSize: "18px",
                               color: "#A61111",
                               cursor: "pointer",
                             }}
