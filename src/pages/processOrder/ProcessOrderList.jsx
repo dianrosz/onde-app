@@ -30,6 +30,37 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Autocomplete, TextField, Typography } from "@mui/material";
 
 export default function ProcessOrderList() {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rows, setRows] = useState([]);
+  const empCollectionRef = collection(db, "pemesanan");
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const getUsers = async () => {
+    const data = await getDocs(empCollectionRef);
+    setRows(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  const filterData = (v) => {
+    if (v) {
+      setRows([v]);
+    } else {
+      setRows([]);
+      getUsers();
+    }
+  };
   return (
     <>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -39,7 +70,7 @@ export default function ProcessOrderList() {
             disablePortal
             id="combo-box-demo"
             sx={{ width: 300 }}
-            getOptionLabel={(rows) => rows.nama || ""}
+            getOptionLabel={(rows) => rows.pemesan || ""}
             renderInput={(params) => (
               <TextField {...params} size="small" label="Cari pemesanan" />
             )}
@@ -55,6 +86,7 @@ export default function ProcessOrderList() {
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
+                <TableCell align="left">No</TableCell>
                 <TableCell align="left">ID Transaksi</TableCell>
                 <TableCell align="left">Nama Pemesan</TableCell>
                 <TableCell align="left">Kategori Layanan</TableCell>
@@ -64,18 +96,42 @@ export default function ProcessOrderList() {
               </TableRow>
             </TableHead>
             <TableBody>
-              <TableRow hover role="checkbox" tabIndex={-1}>
-                <TableCell align="left"></TableCell>
-                <TableCell align="left"></TableCell>
-                <TableCell align="left"></TableCell>
-                <TableCell align="left"></TableCell>
-                <TableCell align="left"></TableCell>
-                <TableCell align="left"></TableCell>
-              </TableRow>
+              {rows
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => {
+                  return (
+                    <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                      <TableCell align="left">{index + 1}</TableCell>
+                      <TableCell key={row.id} align="left">
+                        {row.id}
+                      </TableCell>
+                      <TableCell key={row.id} align="left">
+                        {row.pemesan}
+                      </TableCell>
+                      <TableCell key={row.id} align="left">
+                        {row.layanan}
+                      </TableCell>
+                      {/* Codingan Sementara */}
+                      <TableCell align="left">DiProses</TableCell>
+                      <TableCell key={row.id} align="left">
+                        {row.tanggal}
+                      </TableCell>
+                      <TableCell align="left"></TableCell>
+                    </TableRow>
+                  );
+                })}
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination rowsPerPageOptions={[10, 25, 100]} component="div" />
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </Paper>
     </>
   );

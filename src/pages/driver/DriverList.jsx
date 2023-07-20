@@ -165,6 +165,7 @@ export default function DriverList(onEditItem) {
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
+                <TableCell align="left">No. </TableCell>
                 <TableCell align="left">Nama Driver</TableCell>
                 <TableCell align="left">Jenis Kendaraan</TableCell>
                 <TableCell align="left">No. Plat Kendaraan</TableCell>
@@ -176,9 +177,10 @@ export default function DriverList(onEditItem) {
             <TableBody>
               {rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
+                .map((row, index) => {
                   return (
                     <TableRow hover role="checkbox" tabIndex={-1}>
+                      <TableCell align="left">{index + 1}</TableCell>
                       <TableCell key={row.id} align="left">
                         {row.nama}
                       </TableCell>
