@@ -21,39 +21,23 @@ export default function IsiListOrder() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getUsers = async () => {
-      const data = await getDocs(empCollectionRef);
-      setCards(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    };
     getUsers();
   }, []);
 
+  const getUsers = async () => {
+    const data = await getDocs(empCollectionRef);
+    setCards(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+
   const handleProcess = async (id) => {
-    try {
-      await db
-        .collection("pemesanan")
-        .doc(id)
-        .set({ status: "di proses" }, { merge: true });
-      navigate("/processOrder");
-    } catch (error) {
-      toast.error("error!");
-    }
+    navigate("/processOrder");
+    toast.success("Pesanan Diterima");
+    getUsers("");
   };
 
   const handleNotProcess = async (id) => {
-    try {
-      const docRef = db.collection("pemesanan").doc(id);
-      const doc = await getDocs(docRef);
-
-      if (doc.exists()) {
-        await updateDoc(docRef, { status: "tidak proses" });
-        navigate("/historyOrder");
-      } else {
-        toast.error("error!");
-      }
-    } catch (error) {
-      toast.error("error!");
-    }
+    navigate("/historyOrder");
+    toast.error("Pesanan Ditolak");
   };
 
   return (

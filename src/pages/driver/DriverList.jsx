@@ -6,9 +6,11 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
+import { Link } from "react-router-dom";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
+import Modal from "@mui/material/Modal";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
@@ -27,15 +29,36 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Autocomplete, TextField, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import EditDriver from "../editDriver/EditDriver";
 
-export default function DriverList() {
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 800,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
+
+export default function DriverList(onEditItem) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [rows, setRows] = useState([]);
   const empCollectionRef = collection(db, "driver");
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const [formid, setFormid] = useState(false);
+  const [editopen, setEditOpen] = useState(false);
+  const handleEditOpen = () => setEditOpen(true);
+  const handleEditClose = () => setEditOpen(false);
+  const [id, setId] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUsers();
@@ -87,9 +110,29 @@ export default function DriverList() {
     }
   };
 
+  const editData = (id, nama, gender) => {
+    const data = {
+      id: id,
+      nama: nama,
+      gender: gender,
+    };
+    setFormid(data);
+    handleEditOpen();
+  };
+
   return (
     <>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
+        <Modal
+          open={editopen}
+          //onClose={handleClose}
+          aria-labelledby="parent-modal-title"
+          aria-describedby="parent-modal-description"
+        >
+          <Box sx={style}>
+            <EditDriver closeEvent={handleEditClose} fid={formid} />
+          </Box>
+        </Modal>
         <Box height={10} />
         <Stack direction="row" spacing={2} className="my-2 mb-2 m-2">
           <Autocomplete
@@ -114,7 +157,7 @@ export default function DriverList() {
             href="/addDriver"
             style={{ backgroundColor: "#DE834E" }}
           >
-           + Tambah Driver
+            + Tambah Driver
           </Button>
         </Stack>
         <Box height={10} />
@@ -160,7 +203,11 @@ export default function DriverList() {
                               cursor: "pointer",
                             }}
                             className="cursor-pointer"
+                            onClick={() =>
+                              editData(row.id, row.nama, row.gender)
+                            }
                           />
+
                           <DeleteIcon
                             style={{
                               fontSize: "18px",

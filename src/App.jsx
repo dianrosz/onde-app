@@ -25,6 +25,7 @@ import {
   IsiOrderConfirm,
   AdminList,
   Admin,
+  EditDriver,
 } from "./pages";
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
           <Route path="/orderToday" element={<OrderToday />} />
           <Route path="/orderToday" element={<ListOrderToday />} />
           <Route path="/driver" element={<Driver />} />
+          <Route path="/editDriver/:id" element={<EditDriver />} />
           <Route path="/driverlist" element={<DriverList />} />
           <Route path="/adminlist" element={<AdminList />} />
           <Route path="/admin" element={<Admin />} />

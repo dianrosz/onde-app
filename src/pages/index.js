@@ -3,6 +3,7 @@ export { default as Order } from "./order/Order";
 export { default as OrderToday } from "./orderToday/OrderToday";
 export { default as ListOrderToday } from "./orderToday/ListOrderToday";
 export { default as Driver } from "./driver/Driver";
+export { default as EditDriver } from "./editDriver/EditDriver";
 export { default as DriverList } from "./driver/DriverList";
 export { default as AdminList } from "./admin/AdminList";
 export { default as Admin } from "./admin/Admin";
