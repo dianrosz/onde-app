@@ -9,13 +9,23 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { db } from "../../firebase/config";
-import { collection, getDocs, doc, updateDoc } from "firebase/firestore";
+import Swal from "sweetalert2";
+import {
+  collection,
+  getDocs,
+  doc,
+  updateDoc,
+  setDoc,
+  deleteDoc,
+} from "firebase/firestore";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 export default function IsiListOrder() {
   const [cards, setCards] = useState([]);
   const empCollectionRef = collection(db, "pemesanan");
+  const collectionRef = collection(db, "prosesPemesanan");
+  const pCollectionRef = collection(db, "tolakPemesanan");
   const [open, setOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -29,15 +39,53 @@ export default function IsiListOrder() {
     setCards(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
-  const handleProcess = async (id) => {
-    navigate("/processOrder");
-    toast.success("Pesanan Diterima");
-    getUsers("");
+  const moveItemToProses = async (itemId) => {
+    try {
+      const itemToMove = cards.find((card) => card.id === itemId);
+
+      // Menggunakan collection dan doc dari firebase/firestore
+
+      const docRef = doc(collectionRef, itemId);
+
+      // Memindahkan data ke koleksi "proses"
+      await setDoc(docRef, itemToMove);
+
+      // Menghapus data dari koleksi "daftar"
+      await deleteDoc(doc(empCollectionRef, itemId));
+      navigate("/processOrder");
+
+      Swal.fire({
+        title: "Berhasil!",
+        text: "Pesanan Diterima",
+        confirmButtonColor: "#de834e",
+      });
+    } catch (error) {
+      toast.error("Error!");
+    }
   };
 
-  const handleNotProcess = async (id) => {
-    navigate("/historyOrder");
-    toast.error("Pesanan Ditolak");
+  const handleNotProcess = async (itemId) => {
+    try {
+      const itemToMove = cards.find((card) => card.id === itemId);
+
+      // Menggunakan collection dan doc dari firebase/firestore
+
+      const docRef = doc(pCollectionRef, itemId);
+
+      // Memindahkan data ke koleksi "proses"
+      await setDoc(docRef, itemToMove);
+
+      // Menghapus data dari koleksi "daftar"
+      await deleteDoc(doc(empCollectionRef, itemId));
+      navigate("/historyOrder");
+      Swal.fire({
+        title: "Pesanan Ditolak!",
+        text: "Pesanan Berhasil Ditolak",
+        confirmButtonColor: "#de834e",
+      });
+    } catch (error) {
+      toast.error("Error!");
+    }
   };
 
   return (
@@ -80,7 +128,7 @@ export default function IsiListOrder() {
                 size="small"
                 variant="contained"
                 type="submit"
-                onClick={() => handleProcess(card.id)}
+                onClick={() => moveItemToProses(card.id)}
                 style={{ backgroundColor: "#DE834E" }}
               >
                 Terima
@@ -90,7 +138,7 @@ export default function IsiListOrder() {
                 size="small"
                 variant="contained"
                 type="submit"
-                onClick={handleNotProcess}
+                onClick={() => handleNotProcess(card.id)}
                 style={{ backgroundColor: "#A61111" }}
               >
                 Tolak

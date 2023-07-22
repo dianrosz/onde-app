@@ -47,6 +47,7 @@ export default function Orderv2() {
         parsedValues[field] = value;
 
         Swal.fire({
+          title: "Berhasil!",
           text: "Data Berhasil Di Proses",
           confirmButtonColor: "#de834e",
         });

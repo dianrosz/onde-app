@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import * as React from "react";
 import { useState, useEffect } from "react";
@@ -5,9 +6,11 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
+import { Link } from "react-router-dom";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
+import Modal from "@mui/material/Modal";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
@@ -26,14 +29,34 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Autocomplete, TextField, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import EditDriver from "../editDriver/EditDriver";
 
-export default function ProcessOrderList() {
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 800,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  pt: 2,
+  px: 4,
+  pb: 3,
+};
+
+export default function HistoryOrderList() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [rows, setRows] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const empCollectionRef = collection(db, "prosesPemesanan");
+  const empCollectionRef = collection(db, "tolakPemesanan");
+  const [formid, setFormid] = useState(false);
+  const [editopen, setEditOpen] = useState(false);
+  const [id, setId] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUsers();
@@ -53,6 +76,29 @@ export default function ProcessOrderList() {
     setPage(0);
   };
 
+  const deleteDriver = (id) => {
+    Swal.fire({
+      title: "Hapus Driver?",
+      text: "Data Driver akan terhapus permanen",
+      icon: "Peringatan",
+      showCancelButton: true,
+      confirmButtonColor: "#de834e",
+      cancelButtonColor: "#A61111",
+      confirmButtonText: "Hapus Driver",
+    }).then((result) => {
+      if (result.value) {
+        deleteApi(id);
+      }
+    });
+  };
+
+  const deleteApi = async (id) => {
+    const userDoc = doc(db, "driver", id);
+    await deleteDoc(userDoc);
+    Swal.fire("Terhapus!", "Data terhapus!", "Berhasil");
+    getUsers();
+  };
+
   const filterData = (v) => {
     if (v) {
       setRows([v]);
@@ -61,11 +107,27 @@ export default function ProcessOrderList() {
       getUsers();
     }
   };
+
   return (
     <>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <Box height={10} />
         <Stack direction="row" spacing={2} className="my-2 mb-2 m-2">
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={rows}
+            sx={{ width: 300 }}
+            onChange={(e, v) => filterData(v)}
+            getOptionLabel={(rows) => rows.nama || ""}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                size="small"
+                label="Cari Riwayat Pemesanan"
+              />
+            )}
+          />
           <Typography
             variant="h6"
             component="div"
@@ -77,14 +139,15 @@ export default function ProcessOrderList() {
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
-                <TableCell align="left">No</TableCell>
-                <TableCell align="left">ID Transaksi</TableCell>
+                <TableCell align="left">No. </TableCell>
+                <TableCell align="left">ID Transaksi </TableCell>
                 <TableCell align="left">Nama Pemesan</TableCell>
                 <TableCell align="left">Kategori Layanan</TableCell>
-                <TableCell align="center">Status Pemesanan</TableCell>
+                {/**  <TableCell align="left">Nama Driver</TableCell>
+                <TableCell align="left">Status</TableCell> */}
+                <TableCell align="left">Tanggal Pemesanan</TableCell>
                 <TableCell align="left">Harga</TableCell>
-                <TableCell align="left">Tanggal Pesanan</TableCell>
-                <TableCell align="left">Genarate Link Progress</TableCell>
+                <TableCell align="left">Aksi</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -92,26 +155,53 @@ export default function ProcessOrderList() {
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={index}>
+                    <TableRow hover role="checkbox" tabIndex={-1}>
                       <TableCell align="left">{index + 1}</TableCell>
                       <TableCell key={row.id} align="left">
                         {row.id}
                       </TableCell>
+
                       <TableCell key={row.id} align="left">
                         {row.pemesan}
                       </TableCell>
                       <TableCell key={row.id} align="left">
                         {row.layanan}
                       </TableCell>
-                      {/* Codingan Sementara */}
-                      <TableCell align="center">DiProses</TableCell>
+                      {/**  <TableCell key={row.id} align="left">
+                        {row.driver}
+                      </TableCell>
+                    
+                      <TableCell key={row.id} align="left">
+                        {row.status}
+                      </TableCell>*/}
+
+                      <TableCell key={row.id} align="left">
+                        {row.tanggal}
+                      </TableCell>
                       <TableCell key={row.id} align="left">
                         {row.harga}
                       </TableCell>
                       <TableCell key={row.id} align="left">
-                        {row.tanggal}
+                        <Stack spacing={2} direction="row">
+                          <EditIcon
+                            style={{
+                              fontSize: "18px",
+                              color: "#de834e",
+                              cursor: "pointer",
+                            }}
+                            className="cursor-pointer"
+                          />
+
+                          <DeleteIcon
+                            style={{
+                              fontSize: "18px",
+                              color: "#A61111",
+                              cursor: "pointer",
+                            }}
+                            onClick={() => deleteDriver(row.id)}
+                          />
+                        </Stack>
                       </TableCell>
-                      <TableCell align="left"></TableCell>
                     </TableRow>
                   );
                 })}

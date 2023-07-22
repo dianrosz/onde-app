@@ -31,21 +31,6 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Autocomplete, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import EditDriver from "../editDriver/EditDriver";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 800,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  pt: 2,
-  px: 4,
-  pb: 3,
-};
 
 export default function AdminList() {
   const [page, setPage] = React.useState(0);
@@ -144,6 +129,7 @@ export default function AdminList() {
             <TableHead>
               <TableRow>
                 <TableCell align="left">No. </TableCell>
+                <TableCell align="left">Nama</TableCell>
                 <TableCell align="left">Email Admin</TableCell>
               </TableRow>
             </TableHead>
@@ -154,6 +140,7 @@ export default function AdminList() {
                   return (
                     <TableRow hover role="checkbox" tabIndex={-1}>
                       <TableCell align="left">{index + 1}</TableCell>
+                      <TableCell key={row.id} align="left"></TableCell>
                       <TableCell key={row.id} align="left"></TableCell>
                       <TableCell key={row.id} align="left">
                         <Stack spacing={2} direction="row">

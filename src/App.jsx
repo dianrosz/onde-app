@@ -26,6 +26,7 @@ import {
   AdminList,
   Admin,
   EditDriver,
+  AddAdmin,
 } from "./pages";
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
           <Route path="/driverlist" element={<DriverList />} />
           <Route path="/adminlist" element={<AdminList />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/addAdmin" element={<AddAdmin />} />
           <Route path="/addDriver" element={<AddDriver />} />
           <Route path="/listOrder" element={<ListOrder />} />
           <Route path="/isilistOrder" element={<IsiListOrder />} />

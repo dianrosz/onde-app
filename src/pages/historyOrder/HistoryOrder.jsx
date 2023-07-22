@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import "./historyOrder.css";
-import HistoryOrderList from "./HistoryOderList";
+import HistoryOrderList from "./HistoryOrderList";
 import { Sidebar, Header, Footer } from "../../components";
 
 const HistoryOrder = () => {
