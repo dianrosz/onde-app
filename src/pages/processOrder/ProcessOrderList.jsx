@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import * as React from "react";
 import { useState, useEffect } from "react";
@@ -11,6 +12,7 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import { Link } from "react-router-dom";
 import Stack from "@mui/material/Stack";
 import Swal from "sweetalert2";
 import { db } from "../../firebase/config";
@@ -111,13 +113,21 @@ export default function ProcessOrderList() {
                       <TableCell key={row.id} align="left">
                         {row.tanggal}
                       </TableCell>
-                      <TableCell align="left"></TableCell>
+                      <TableCell align="left">
+                        <Link key={row.id} to={`/homeDriver/${row.id}`}>
+                          Link Progress Driver
+                        </Link>
+                        <Link key={row.id} to={`/homeDriver/${row.id}`}>
+                          Link Customer
+                        </Link>
+                      </TableCell>
                     </TableRow>
                   );
                 })}
             </TableBody>
           </Table>
         </TableContainer>
+
         <TablePagination
           rowsPerPageOptions={[10, 25, 100]}
           component="div"

@@ -6,21 +6,18 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Grid, TextareaAutosize, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import MenuItem from "@mui/material/MenuItem";
 import Swal from "sweetalert2";
 import { db } from "../../firebase/config";
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
+import { auth } from "../../firebase/config";
 import { Sidebar, Header, Footer } from "../../components";
 
 export default function AddAdmin() {
-  const [nama, setNama] = React.useState("");
-  const [kontak, setKontak] = useState();
-  const [plat, setPlat] = React.useState("");
-  const [gender, setGender] = useState("");
-  const [kendaraan, setKendaraan] = React.useState("");
-  const [rows, setRows] = useState([]);
-  const empCollectionRef = collection(db, "driver");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
@@ -35,61 +32,19 @@ export default function AddAdmin() {
     },
   ];
 
-  const chooseKendaraan = [
-    {
-      value: "Mobil",
-      label: "Mobil",
-    },
-    {
-      value: "Motor",
-      label: "Motor",
-    },
-  ];
+  const handleSignup = () => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Pendaftaran berhasil
+        const user = userCredential.user;
+        toast.success("admin berhasil ditambahkan", user);
+        navigate("/admin");
+      })
+      .catch((error) => {
+        // Penanganan kesalahan
 
-  const handleNamaChange = (event) => {
-    setNama(event.target.value);
-  };
-
-  const handleKontakChange = (event) => {
-    setKontak(event.target.value);
-  };
-
-  const handlePlatChange = (event) => {
-    setPlat(event.target.value);
-  };
-
-  const handleGenderChange = (event) => {
-    setGender(event.target.value);
-  };
-
-  const handleKendaraanChange = (event) => {
-    setKendaraan(event.target.value);
-  };
-
-  const createUser = async () => {
-    if (!nama || !kontak || !kendaraan || !gender || !plat) {
-      toast.error("Lengkapi data terlebih dahulu");
-    } else {
-      await addDoc(empCollectionRef, {
-        nama: nama,
-        kontak: Number(kontak),
-        kendaraan: kendaraan,
-        gender: gender,
-        plat: plat,
+        toast.error(error);
       });
-      getUsers();
-      Swal.fire({
-        title: "Berhasil",
-        text: "Data Driver Berhasil Tersimpan",
-        confirmButtonColor: "#de834e",
-      });
-      navigate("/driver");
-    }
-  };
-
-  const getUsers = async () => {
-    const data = await getDocs(empCollectionRef);
-    setRows(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
   };
 
   return (
@@ -107,22 +62,14 @@ export default function AddAdmin() {
               </div>
               <div className="card-body">
                 <Grid container spacing={2}>
-                  <Grid item xs={12}>
-                    <TextField
-                      id="outlined-basic"
-                      label="Nama Lengkap Admin"
-                      required
-                      variant="outlined"
-                      onChange={handleNamaChange}
-                      value={nama}
-                      sx={{ minWidth: "100%" }}
-                    />
-                  </Grid>
                   <Grid item xs={6}>
                     <TextField
                       id="outlined-basic"
                       label="Email"
                       required
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       variant="outlined"
                       sx={{ minWidth: "100%" }}
                     />
@@ -132,56 +79,19 @@ export default function AddAdmin() {
                       id="outlined-basic"
                       label="Password"
                       required
+                      type="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       variant="outlined"
                       sx={{ minWidth: "100%" }}
                     />
                   </Grid>
 
-                  <Grid item xs={6}>
-                    <TextField
-                      id="outlined-basic"
-                      select
-                      label="Jenis Kelamin"
-                      required
-                      variant="outlined"
-                      onChange={handleGenderChange}
-                      value={gender}
-                      sx={{ minWidth: "100%" }}
-                    >
-                      {chooseGender.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
-                        </MenuItem>
-                      ))}
-                    </TextField>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <TextField
-                      id="outlined-basic"
-                      label="Kontak/No. Handphone"
-                      type="number"
-                      required
-                      variant="outlined"
-                      onChange={handleKontakChange}
-                      value={kontak}
-                      sx={{ minWidth: "100%" }}
-                    />
-                  </Grid>
-
-                  <Grid item xs={12} align="Center">
-                    <TextField
-                      id="outlined-multiline-static"
-                      label="Catatan"
-                      multiline
-                      rows={4}
-                      sx={{ minWidth: "100%" }}
-                    />
-                  </Grid>
                   <Grid item xs={12}>
                     <Typography variant="h5" align="Right">
                       <Button
                         variant="contained"
-                        onClick={createUser}
+                        onClick={handleSignup}
                         type="submit"
                         style={{
                           marginTop: "10px",

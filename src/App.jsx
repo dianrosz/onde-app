@@ -27,6 +27,7 @@ import {
   Admin,
   EditDriver,
   AddAdmin,
+  HomeDriver,
 } from "./pages";
 
 function App() {
@@ -59,6 +60,7 @@ function App() {
           <Route path="/orderVer2" element={<Orderv2 />} />
           <Route path="/orderConfirm" element={<OrderConfirm />} />
           <Route path="/orderConfirm" element={<IsiOrderConfirm />} />
+          <Route path="/homeDriver/:id" element={<HomeDriver />} />
         </Routes>
       </BrowserRouter>
     </>

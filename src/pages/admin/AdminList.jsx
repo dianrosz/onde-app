@@ -31,12 +31,14 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Autocomplete, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { auth } from "../../firebase/config";
 
 export default function AdminList() {
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [rows, setRows] = useState([]);
   const empCollectionRef = collection(db, "admin");
+
   const [formid, setFormid] = useState(false);
   const [editopen, setEditOpen] = useState(false);
   const [id, setId] = useState("");
@@ -44,12 +46,18 @@ export default function AdminList() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Ambil data pengguna dari Firestore saat komponen mount
+
     getUsers();
-  }, []);
+  }, []); // tambahkan usersCollection sebagai dependensi untuk mencegah infinite loop
 
   const getUsers = async () => {
-    const data = await getDocs(empCollectionRef);
-    setRows(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    try {
+      const data = await getDocs(empCollectionRef);
+      setRows(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    } catch (error) {
+      console.error("Terjadi kesalahan saat mengambil data pengguna:", error);
+    }
   };
 
   const handleChangePage = (event, newPage) => {
@@ -140,7 +148,9 @@ export default function AdminList() {
                   return (
                     <TableRow hover role="checkbox" tabIndex={-1}>
                       <TableCell align="left">{index + 1}</TableCell>
-                      <TableCell key={row.id} align="left"></TableCell>
+                      <TableCell key={row.id} align="left">
+                        {row.email}
+                      </TableCell>
                       <TableCell key={row.id} align="left"></TableCell>
                       <TableCell key={row.id} align="left">
                         <Stack spacing={2} direction="row">
