@@ -114,11 +114,11 @@ export default function ProcessOrderList() {
                         {row.tanggal}
                       </TableCell>
                       <TableCell align="left">
-                        <Link key={row.id} to={`/homeDriver/${row.id}`}>
-                          Link Progress Driver
+                        <Link key={row.id} to={`/pageDriver/${row.id}`}>
+                          Link Progress Driver |
                         </Link>
-                        <Link key={row.id} to={`/homeDriver/${row.id}`}>
-                          Link Customer
+                        <Link key={row.id} to={`/pageCustomer/${row.id}`}>
+                          | Link Customer
                         </Link>
                       </TableCell>
                     </TableRow>

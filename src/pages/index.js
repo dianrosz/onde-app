@@ -22,4 +22,5 @@ export { default as Registrasi } from "./auth/Registrasi";
 export { default as Orderv2 } from "./order/Orderv2";
 export { default as OrderConfirm } from "./orderConfirm/OrderConfirm";
 export { default as IsiOrderConfirm } from "./orderConfirm/IsiOrderConfirm";
-export { default as HomeDriver } from "./homeDriver/HomeDriver";
+export { default as PageDriver } from "./pageDriver/PageDriver";
+export { default as PageCustomer } from "./pageCustomer/PageCustomer";

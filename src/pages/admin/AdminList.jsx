@@ -139,6 +139,7 @@ export default function AdminList() {
                 <TableCell align="left">No. </TableCell>
                 <TableCell align="left">Nama</TableCell>
                 <TableCell align="left">Email Admin</TableCell>
+                <TableCell align="left">Aksi</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -149,9 +150,11 @@ export default function AdminList() {
                     <TableRow hover role="checkbox" tabIndex={-1}>
                       <TableCell align="left">{index + 1}</TableCell>
                       <TableCell key={row.id} align="left">
+                        {row.nama}
+                      </TableCell>
+                      <TableCell key={row.id} align="left">
                         {row.email}
                       </TableCell>
-                      <TableCell key={row.id} align="left"></TableCell>
                       <TableCell key={row.id} align="left">
                         <Stack spacing={2} direction="row">
                           <EditIcon
