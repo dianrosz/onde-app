@@ -147,7 +147,6 @@ export default function HistoryOrderList() {
                 <TableCell align="left">Status</TableCell> */}
                 <TableCell align="left">Tanggal Pemesanan</TableCell>
                 <TableCell align="left">Harga</TableCell>
-                <TableCell align="left">Aksi</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -180,27 +179,6 @@ export default function HistoryOrderList() {
                       </TableCell>
                       <TableCell key={row.id} align="left">
                         {row.harga}
-                      </TableCell>
-                      <TableCell key={row.id} align="left">
-                        <Stack spacing={2} direction="row">
-                          <EditIcon
-                            style={{
-                              fontSize: "18px",
-                              color: "#de834e",
-                              cursor: "pointer",
-                            }}
-                            className="cursor-pointer"
-                          />
-
-                          <DeleteIcon
-                            style={{
-                              fontSize: "18px",
-                              color: "#A61111",
-                              cursor: "pointer",
-                            }}
-                            onClick={() => deleteDriver(row.id)}
-                          />
-                        </Stack>
                       </TableCell>
                     </TableRow>
                   );
