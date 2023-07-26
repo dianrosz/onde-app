@@ -1,6 +1,7 @@
 .orderToday {
   margin: 20px;
-  color: #A3423B;
+  color: #a3423b;
+  min-height: 77vh;
 }
 .table th {
   font-size: 14px;
