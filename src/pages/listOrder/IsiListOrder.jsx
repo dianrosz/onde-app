@@ -113,9 +113,17 @@ export default function IsiListOrder() {
               <p class="card-text" key={card.id}>
                 Lokasi Pengantaran : {card.pengantaran}
               </p>
-              <p class="card-text" key={card.id}>
-                Lokasi Pengambilan : {card.pengambilan}
-              </p>
+
+              {card.penjemputan && (
+                <p class="card-text" key={card.id}>
+                  Lokasi Penjemputan : {card.penjemputan}
+                </p>
+              )}
+              {card.pengambilan && (
+                <p class="card-text" key={card.id}>
+                  Lokasi Pengambilan : {card.pengambilan}
+                </p>
+              )}
               <p class="card-text" key={card.id}>
                 Tanggal Transaksi : {card.tanggal}
               </p>
