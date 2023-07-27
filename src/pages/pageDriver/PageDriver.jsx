@@ -8,9 +8,12 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { useParams } from "react-router-dom";
-
+import { Table } from "react-bootstrap";
+import "./pageDriver.css";
 import { db } from "../../firebase/config";
 import { toast } from "react-toastify";
+import { Button } from "@mui/material";
+import { Footer } from "../../components";
 
 export default function PageDriver({ progressId }) {
   const [loading, setLoading] = useState(true);
@@ -72,41 +75,91 @@ export default function PageDriver({ progressId }) {
     }
   };
   return (
-    <div>
-      {data ? (
-        <div>
-          <h2>Halaman Driver</h2>
-          <p>Nama: {data.pemesan}</p>
-          <p>Lokasi Penjemputan: {data.penjemputan}</p>
-          <p>Lokasi Pengambilan: {data.pengambilan}</p>
-          <p>Tanggal Pesanan: {data.tanggal}</p>
-          <p>Kategori Layanan: {data.layanan}</p>
-          <p>Harga: {data.harga}</p>
-          {/* Tampilkan data individu lainnya sesuai struktur tabel */}
+    <>
+      <div className="pageDriver">
+        {data ? (
           <div>
-            <h1>Pemberitahuan Driver</h1>
+            <h3>Halaman Driver</h3>
+            {/** 
+            <Table striped hover>
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                </tr>
+              </tbody>
+            </Table>
+            */}
+            <p>Nama: {data.pemesan}</p>
 
-            <div id="progress">
-              <button
-                id="btn-menuju-lokasi"
-                onClick={() => updateProgress("menuju_lokasi")}
-                disabled={progress === "sampai_lokasi"}
-              >
-                Menuju Lokasi
-              </button>
-              <button
-                id="btn-sampai-lokasi"
-                onClick={() => updateProgress("sampai_lokasi")}
-                disabled={progress === "sampai_lokasi"}
-              >
-                Sampai Lokasi
-              </button>
+            {data.penjemputan && (
+              <p key={data.id}>Lokasi Penjemputan : {data.penjemputan}</p>
+            )}
+            {data.pengambilan && (
+              <p key={data.id}>Lokasi Pengambilan : {data.pengambilan}</p>
+            )}
+            <p>Lokasi Pengantaran: {data.pengantaran}</p>
+            <p>Tanggal Pesanan: {data.tanggal}</p>
+            <p>Kategori Layanan: {data.layanan}</p>
+            <p>Harga: {data.harga}</p>
+            {/* Tampilkan data individu lainnya sesuai struktur tabel */}
+            <div>
+              <h1>Button Progress Driver</h1>
+
+              <div id="progress">
+                <Button
+                  size="large"
+                  variant="contained"
+                  type="submit"
+                  style={{
+                    backgroundColor: "#DE834E",
+                    color: "black",
+
+                    margin: "6px",
+                  }}
+                  id="btn-menuju-lokasi"
+                  onClick={() => updateProgress("menuju_lokasi")}
+                  disabled={progress === "sampai_lokasi"}
+                >
+                  Menuju Lokasi
+                </Button>
+                <Button
+                  size="large"
+                  variant="contained"
+                  type="submit"
+                  style={{
+                    backgroundColor: "#DE834E",
+                    color: "black",
+
+                    margin: "6px",
+                  }}
+                  id="btn-sampai-lokasi"
+                  onClick={() => updateProgress("sampai_lokasi")}
+                  disabled={progress === "sampai_lokasi"}
+                >
+                  Sampai Lokasi
+                </Button>
+              </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <p>Data tidak ditemukan.</p>
-      )}
-    </div>
+        ) : (
+          <p>Data tidak ditemukan.</p>
+        )}
+      </div>
+      <Footer />
+    </>
   );
 }

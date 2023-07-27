@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { Container, Typography, Grid } from "@mui/material";
+import { Table } from "react-bootstrap";
 import { auth } from "../../firebase/config";
 import { Sidebar, Header, Footer } from "../../components";
 import React, { useState, useEffect } from "react";
@@ -166,6 +167,41 @@ const Home = () => {
             </div>
           </div>
         </div>
+        {/**
+        <div className="m-4">
+          <div className="p-3 bg-white shadow-sm d-flex  justify-content-around align-items-center">
+            <Table striped bordered hover size="sm">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Username</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>@fat</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td colSpan={2}>Larry the Bird</td>
+                  <td>@twitter</td>
+                </tr>
+              </tbody>
+            </Table>
+          </div>
+        </div>
+         */}
         <div className="m-4">
           <div>
             <div className="diag-chart p-3 bg-white shadow-sm d-flex  justify-content-around align-items-center ">
@@ -177,7 +213,7 @@ const Home = () => {
 
                 <BarChart width={600} height={300} data={getChartData()}>
                   <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="tanggal" />
+                  <XAxis />
                   <YAxis />
                   <Tooltip />
                   <Legend />

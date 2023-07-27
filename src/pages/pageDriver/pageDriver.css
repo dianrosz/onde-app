@@ -1,0 +1,8 @@
+.pageDriver {
+  text-align: center;
+  height: 80vh;
+  margin: 15px;
+}
+#progress {
+  font-weight: bold;
+}
