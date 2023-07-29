@@ -1,15 +1,22 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { collection, doc, getDoc, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  onSnapshot,
+  query,
+  where,
+} from "firebase/firestore";
 import { useParams } from "react-router-dom";
 
 import { db } from "../../firebase/config";
 
-export default function PageCustomer({ progressId }) {
+export default function PageCustomer() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const [progress, setProgress] = useState("");
+  const [messages, setMessages] = useState([]);
 
   const { id } = useParams();
 
@@ -31,19 +38,26 @@ export default function PageCustomer({ progressId }) {
       }
     };
 
+    const q = query(collection(db, "prosesPemesanan"), where("id", "==", id));
+
     const unsubscribe = onSnapshot(
-      doc(collection(db, "progressDriver"), progressId),
+      q,
       (snapshot) => {
-        if (snapshot.exists()) {
-          const data = snapshot.data();
-          setProgress(data.progress);
-        }
+        const messagesData = [];
+        snapshot.forEach((doc) => {
+          messagesData.push({ id: doc.id, ...doc.data() });
+        });
+
+        setMessages(messagesData);
+      },
+      (error) => {
+        setError(error);
       }
     );
 
     fetchData();
     return () => unsubscribe();
-  }, [id, progressId]);
+  }, [id]);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -65,13 +79,23 @@ export default function PageCustomer({ progressId }) {
           <p>Harga: {data.harga}</p>
           {/* Tampilkan data individu lainnya sesuai struktur tabel */}
           <div>
-            <h1>Pemberitahuan Customer</h1>
-
-            {progress === "menuju_lokasi" && (
-              <p>Driver sedang menuju ke lokasi.</p>
-            )}
-            {progress === "sampai_lokasi" && (
-              <p>Driver telah sampai di lokasi.</p>
+            <h2>Progress Driver</h2>
+            {messages.length > 0 ? (
+              <ul>
+                {messages.map((message) => (
+                  <li key={message.id}>
+                    <p>
+                      Driver dengan ID {message.id} sedang dalam status:
+                      {message.status}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p>
+                Tidak ada driver dalam perjalanan menuju atau sudah sampai
+                lokasi.
+              </p>
             )}
           </div>
         </div>

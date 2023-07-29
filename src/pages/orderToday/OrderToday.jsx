@@ -12,12 +12,12 @@ const OrderToday = () => {
       <section>
         <div className="orderToday">
           <div className="judul">
-            <h4>DAFTAR PEMESANAN HARI INI</h4>
+            <h4>RIWAYAT PEMESANAN DIPROSES</h4>
           </div>
           <div className="card">
             <div className="main-card">
               <div className="card-header">
-                <h5>Pemesanan Hari Ini</h5>
+                <h5>Riwayat pemesanan Selesai</h5>
               </div>
               <div className="card-body">
                 <ListOrderToday />

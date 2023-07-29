@@ -3,6 +3,7 @@
 /* eslint-disable no-unused-vars */
 import * as React from "react";
 import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -30,6 +31,43 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Autocomplete, TextField, Typography } from "@mui/material";
 
 export default function ListOrderToday() {
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rows, setRows] = useState([]);
+  const empCollectionRef = collection(db, "pemesananHariIni");
+  const [formid, setFormid] = useState(false);
+  const [editopen, setEditOpen] = useState(false);
+  const handleEditOpen = () => setEditOpen(true);
+  const handleEditClose = () => setEditOpen(false);
+  const [id, setId] = useState("");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const getUsers = async () => {
+    const data = await getDocs(empCollectionRef);
+    setRows(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+  };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  const filterData = (v) => {
+    if (v) {
+      setRows([v]);
+    } else {
+      getUsers();
+    }
+  };
   return (
     <>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
@@ -59,27 +97,51 @@ export default function ListOrderToday() {
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
+                <TableCell align="left">No.</TableCell>
                 <TableCell align="left">ID Transaksi</TableCell>
                 <TableCell align="left">Nama Pemesan</TableCell>
                 <TableCell align="left">Kategori Layanan</TableCell>
                 <TableCell align="left">Status Pemesanan</TableCell>
-                <TableCell align="left">Driver</TableCell>
                 <TableCell align="left">Tanggal Transaksi</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              <TableRow hover role="checkbox" tabIndex={-1}>
-                <TableCell align="left"></TableCell>
-                <TableCell align="left"></TableCell>
-                <TableCell align="left"></TableCell>
-                <TableCell align="left"></TableCell>
-                <TableCell align="left"></TableCell>
-                <TableCell align="left"></TableCell>
-              </TableRow>
+              {rows
+                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, index) => {
+                  return (
+                    <TableRow hover role="checkbox" tabIndex={-1}>
+                      <TableCell align="left">{index + 1}</TableCell>
+                      <TableCell key={row.id} align="left">
+                        {row.id}
+                      </TableCell>
+                      <TableCell key={row.id} align="left">
+                        {row.pemesan}
+                      </TableCell>
+                      <TableCell key={row.id} align="left">
+                        {row.layanan}
+                      </TableCell>
+                      <TableCell key={row.id} align="left">
+                        Selesai
+                      </TableCell>
+                      <TableCell key={row.id} align="left">
+                        {row.tanggal}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination rowsPerPageOptions={[10, 25, 100]} component="div" />
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
       </Paper>
     </>
   );

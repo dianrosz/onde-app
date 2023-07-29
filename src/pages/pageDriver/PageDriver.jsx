@@ -1,13 +1,15 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import {
+  deleteDoc,
   collection,
   doc,
   getDoc,
-  onSnapshot,
+  updateDoc,
+  serverTimestamp,
   setDoc,
 } from "firebase/firestore";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import "./pageDriver.css";
 import { db } from "../../firebase/config";
@@ -20,6 +22,10 @@ export default function PageDriver({ progressId }) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [progress, setProgress] = useState("");
+  const [menujuLokasiClicked, setMenujuLokasiClicked] = useState(false);
+  const [sampaiLokasiClicked, setSampaiLokasiClicked] = useState(false);
+  const [showPesananSelesaiButton, setShowPesananSelesaiButton] =
+    useState(false);
 
   const { id } = useParams();
   useEffect(() => {
@@ -30,6 +36,9 @@ export default function PageDriver({ progressId }) {
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
           setData(docSnap.data());
+          setShowPesananSelesaiButton(
+            docSnap.data().status === "Sampai Lokasi"
+          );
         } else {
           setError(new Error("Data tidak ditemukan"));
         }
@@ -40,19 +49,71 @@ export default function PageDriver({ progressId }) {
       }
     };
 
-    const unsubscribe = onSnapshot(
-      doc(collection(db, "progressDriver"), progressId),
-      (snapshot) => {
-        if (snapshot.exists()) {
-          const data = snapshot.data();
-          setProgress(data.progress);
-        }
-      }
-    );
-
     fetchData();
-    return () => unsubscribe();
-  }, [id, progressId]);
+  }, [id]);
+
+  const handleMenujuLokasi = async () => {
+    // Tambahkan kode untuk tindakan saat tombol "Menuju Lokasi" diklik
+    try {
+      if (!menujuLokasiClicked) {
+        const docRef = doc(collection(db, "prosesPemesanan"), id);
+        await updateDoc(docRef, {
+          status: "Menuju Lokasi",
+          timestamp: serverTimestamp(),
+        });
+        setMenujuLokasiClicked(true);
+      }
+    } catch (error) {
+      setError(error);
+    }
+  };
+
+  const handleSampaiLokasi = async () => {
+    // Tambahkan kode untuk tindakan saat tombol "Sampai Lokasi" diklik
+    try {
+      if (!sampaiLokasiClicked) {
+        const docRef = doc(collection(db, "prosesPemesanan"), id);
+        await updateDoc(docRef, {
+          status: "Sampai Lokasi",
+          timestamp: serverTimestamp(),
+        });
+        setSampaiLokasiClicked(true);
+        setShowPesananSelesaiButton(true);
+      }
+    } catch (error) {
+      setError(error);
+    }
+  };
+
+  const history = useNavigate();
+
+  const handlePesananSelesai = async () => {
+    try {
+      const docRef = doc(collection(db, "pemesananSelesai"), id); // Ganti 'selesai' dengan nama koleksi yang Anda inginkan untuk pesanan yang selesai
+      await setDoc(docRef, {
+        ...data,
+        status: "Selesai",
+        timestamp: serverTimestamp(),
+      });
+
+      // Pindahkan data dari koleksi 'drivers' ke koleksi 'hari ini'
+      const hariIniRef = doc(collection(db, "pemesananHariIni"), id); // Ganti 'hari ini' dengan nama koleksi yang Anda inginkan untuk pesanan hari ini
+      await setDoc(hariIniRef, {
+        ...data,
+        timestamp: serverTimestamp(),
+      });
+
+      // Hapus data dari koleksi 'drivers' karena data telah dipindahkan
+      const driversRef = doc(collection(db, "prosesPemesanan"), id);
+      await deleteDoc(driversRef);
+
+      localStorage.setItem("driverSelesai", JSON.stringify(data));
+      // Arahkan pengguna ke halaman selesai
+      history("/finishPage");
+    } catch (error) {
+      setError(error);
+    }
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -64,16 +125,6 @@ export default function PageDriver({ progressId }) {
 
   //button progress
 
-  const updateProgress = async (status) => {
-    try {
-      await setDoc(doc(collection(db, "progressDriver"), progressId), {
-        progress: status,
-      });
-    } catch (error) {
-      console.error(error);
-      toast.error("error!");
-    }
-  };
   return (
     <>
       <div className="pageDriver">
@@ -131,8 +182,8 @@ export default function PageDriver({ progressId }) {
                     margin: "6px",
                   }}
                   id="btn-menuju-lokasi"
-                  onClick={() => updateProgress("menuju_lokasi")}
-                  disabled={progress === "sampai_lokasi"}
+                  onClick={handleMenujuLokasi}
+                  disabled={menujuLokasiClicked}
                 >
                   Menuju Lokasi
                 </Button>
@@ -147,11 +198,16 @@ export default function PageDriver({ progressId }) {
                     margin: "6px",
                   }}
                   id="btn-sampai-lokasi"
-                  onClick={() => updateProgress("sampai_lokasi")}
-                  disabled={progress === "sampai_lokasi"}
+                  onClick={handleSampaiLokasi}
+                  disabled={sampaiLokasiClicked}
                 >
                   Sampai Lokasi
                 </Button>
+                {showPesananSelesaiButton && (
+                  <button onClick={handlePesananSelesai}>
+                    Pesanan Selesai Diproses
+                  </button>
+                )}
               </div>
             </div>
           </div>
