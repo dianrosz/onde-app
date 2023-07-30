@@ -8,6 +8,8 @@ import {
   query,
   where,
 } from "firebase/firestore";
+import { TextField, Grid } from "@mui/material";
+import "./pageCustomer.css";
 import { useParams } from "react-router-dom";
 
 import { db } from "../../firebase/config";
@@ -67,36 +69,212 @@ export default function PageCustomer() {
     return <p>Error: {error.message}</p>;
   }
   return (
-    <div>
+    <div className="pageCustomer">
       {data ? (
-        <div>
-          <h2>Halaman Customer</h2>
-          <p>Nama: {data.pemesan}</p>
-          <p>Lokasi Penjemputan: {data.penjemputan}</p>
-          <p>Lokasi Pengambilan: {data.pengambilan}</p>
-          <p>Tanggal Pesanan: {data.tanggal}</p>
-          <p>Kategori Layanan: {data.layanan}</p>
-          <p>Harga: {data.harga}</p>
-          {/* Tampilkan data individu lainnya sesuai struktur tabel */}
-          <div>
-            <h2>Progress Driver</h2>
-            {messages.length > 0 ? (
-              <ul>
-                {messages.map((message) => (
-                  <li key={message.id}>
+        <div className="card card-customer center">
+          <div className="main-card">
+            <div className="card-header">
+              <h4 style={{ color: "#a3423b" }}>Daftar Pesanan</h4>
+            </div>
+            <div className="card-body">
+              <div>
+                <Grid container spacing={2}>
+                  {data.layanan && (
+                    <TextField
+                      value={data.layanan}
+                      id="outlined-read-only-input"
+                      sx={{
+                        width: "100%",
+                        marginLeft: "18px",
+                        marginTop: "12px",
+                      }}
+                      label="Kategori Layanan"
+                      defaultValue="Kategori Layanan"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  )}
+                  {data.pemesan && (
+                    <TextField
+                      value={data.pemesan}
+                      id="outlined-read-only-input"
+                      sx={{
+                        width: "100%",
+                        marginLeft: "18px",
+                        marginTop: "12px",
+                      }}
+                      label="Nama Pemesan"
+                      defaultValue="Nama Pemesan"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  )}
+                  {data.nama && (
+                    <TextField
+                      value={data.nama}
+                      id="outlined-read-only-input"
+                      sx={{
+                        width: "100%",
+                        marginLeft: "18px",
+                        marginTop: "12px",
+                      }}
+                      label="Nama Pemesan"
+                      defaultValue="Nama Pemesan"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  )}
+                  <TextField
+                    value={data.harga}
+                    id="outlined-read-only-input"
+                    sx={{
+                      width: "100%",
+                      marginLeft: "18px",
+                      marginTop: "12px",
+                    }}
+                    label="Harga"
+                    defaultValue="harga"
+                    InputProps={{
+                      readOnly: true,
+                    }}
+                  />
+                  {data.toko && (
+                    <TextField
+                      value={data.toko}
+                      id="outlined-read-only-input"
+                      sx={{
+                        width: "100%",
+                        marginLeft: "18px",
+                        marginTop: "12px",
+                      }}
+                      label="Nama Toko"
+                      defaultValue="toko"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  )}
+                  {data.penjemputan && (
+                    <TextField
+                      value={data.penjemputan}
+                      id="outlined-read-only-input"
+                      sx={{
+                        width: "100%",
+                        marginLeft: "18px",
+                        marginTop: "12px",
+                      }}
+                      label="Lokasi Penjemputan"
+                      defaultValue="Lokasi Penjemputan"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  )}
+                  {data.pengambilan && (
+                    <TextField
+                      value={data.pengambilan}
+                      id="outlined-read-only-input"
+                      sx={{
+                        width: "100%",
+                        marginLeft: "18px",
+                        marginTop: "12px",
+                      }}
+                      label="Lokasi Pengambilan"
+                      defaultValue="Lokasi Pengambilan"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  )}
+
+                  {data.pesanan && (
+                    <TextField
+                      value={data.pesanan}
+                      id="outlined-read-only-input"
+                      multiline
+                      maxRows={4}
+                      sx={{
+                        width: "100%",
+                        marginLeft: "18px",
+                        marginTop: "12px",
+                      }}
+                      label="Daftar Pesanan"
+                      defaultValue="Daftar Pesanan"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  )}
+                  {data.pengantaran && (
+                    <TextField
+                      value={data.pengantaran}
+                      id="outlined-read-only-input"
+                      sx={{
+                        width: "100%",
+                        marginLeft: "18px",
+                        marginTop: "12px",
+                      }}
+                      label="Lokasi Pengantaran"
+                      defaultValue="Lokasi Pengantaran"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  )}
+                  {data.tanggal && (
+                    <TextField
+                      value={data.tanggal}
+                      id="outlined-read-only-input"
+                      sx={{
+                        width: "100%",
+                        marginLeft: "18px",
+                        marginTop: "12px",
+                      }}
+                      label="Tanggal Pesanan"
+                      defaultValue="Tanggal Pesanan"
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  )}
+                </Grid>
+                {/* Tampilkan data individu lainnya sesuai struktur tabel */}
+                <div>
+                  <h4 style={{ color: "#a3423b", margin: "8px" }}>
+                    Progress Driver
+                  </h4>
+                  {messages.length > 0 ? (
+                    <Grid>
+                      {messages.map((message) => (
+                        <p key={message.id}>
+                          <p>
+                            Driver sedang dalam status:
+                            <Grid item xs={12}>
+                              <TextField
+                                id="outlined-read-only-input"
+                                InputProps={{
+                                  readOnly: true,
+                                }}
+                                sx={{ margin: "7px" }}
+                                value={message.status}
+                              />
+                            </Grid>
+                          </p>
+                        </p>
+                      ))}
+                    </Grid>
+                  ) : (
                     <p>
-                      Driver dengan ID {message.id} sedang dalam status:
-                      {message.status}
+                      Tidak ada driver dalam perjalanan menuju atau sudah sampai
+                      lokasi.
                     </p>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p>
-                Tidak ada driver dalam perjalanan menuju atau sudah sampai
-                lokasi.
-              </p>
-            )}
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       ) : (

@@ -1,19 +1,16 @@
-.pageDriver {
+.pageCustomer {
   text-align: center;
-  height: 80vh;
   margin: 15px;
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
-.card-driver {
+.card-customer {
   width: 70%;
   margin: 0 auto;
 }
-#progress {
-  margin-top: 12px;
-  font-weight: bold;
-}
 
 @media (max-width: 600px) {
-  .card-driver {
+  .card-customer {
     width: 100%;
     margin: 0 auto;
   }

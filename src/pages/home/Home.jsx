@@ -1,12 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { Container, Typography, Grid } from "@mui/material";
-import { Table } from "react-bootstrap";
-import { auth } from "../../firebase/config";
 import { Sidebar, Header, Footer } from "../../components";
 import React, { useState, useEffect } from "react";
 import "./home.css";
 import { db } from "../../firebase/config";
-import { getFirestore, collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot } from "firebase/firestore";
 import {
   BarChart,
   Bar,
@@ -14,20 +12,17 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  LineChart,
-  Line,
   Legend,
 } from "recharts";
 import { BsBagCheckFill, BsBagXFill, BsPeopleFill } from "react-icons/bs";
 import { FaUserClock } from "react-icons/fa";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-import { counter } from "@fortawesome/fontawesome-svg-core";
 
 const Home = () => {
   const [orders, setOrders] = useState([]);
   const [tolak, setTolak] = useState([]);
   const [driver, setDriver] = useState([]);
   const [progress, setProgress] = useState([]);
+  const [finish, setFinish] = useState([]);
 
   useEffect(() => {
     // Ambil data pesanan dari Firestore secara real-time
@@ -72,10 +67,22 @@ const Home = () => {
       }
     );
 
+    const countFinish = onSnapshot(
+      collection(db, "pemesananSelesai"),
+      (snapshot) => {
+        const dataProgress = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setFinish(dataProgress);
+      }
+    );
+
     return () => unsubscribe();
     return () => countTolak();
     return () => countDriver();
     return () => countProgress();
+    return () => countFinish();
   }, [db]);
 
   const getTotalOrders = () => {
@@ -90,27 +97,16 @@ const Home = () => {
   const getTotalProgress = () => {
     return progress.length;
   };
+  const getTotalFinish = () => {
+    return finish.length;
+  };
 
   // Ambil data untuk grafik batang (jumlah pesanan per kategori produk)
   const getChartData = () => {
     const categoryCounts = {};
 
-    orders.forEach((order) => {
+    finish.forEach((order) => {
       const { productType } = order;
-      categoryCounts[productType] = (categoryCounts[productType] || 0) + 1;
-    });
-
-    return Object.entries(categoryCounts).map(([tanggal, id]) => ({
-      tanggal,
-      id,
-    }));
-  };
-
-  const getChartTolak = () => {
-    const categoryCounts = {};
-
-    tolak.forEach((stop) => {
-      const { productType } = stop;
       categoryCounts[productType] = (categoryCounts[productType] || 0) + 1;
     });
 
@@ -207,7 +203,7 @@ const Home = () => {
             <div className="diag-chart p-3 bg-white shadow-sm d-flex  justify-content-around align-items-center ">
               <div>
                 <Typography variant="h6" sx={{ textAlign: "center" }}>
-                  Jumlah Seluruh Data Pesanan yang Selesai: {getTotalOrders()}
+                  Jumlah Seluruh Data Pesanan yang Selesai: {getTotalFinish()}
                 </Typography>
                 {/* Tampilkan grafik batang */}
 

@@ -51,7 +51,6 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/addAdmin" element={<AddAdmin />} />
           <Route path="/addDriver" element={<AddDriver />} />
-
           <Route path="/listOrder" element={<ListOrder />} />
           <Route path="/isilistOrder" element={<IsiListOrder />} />
           <Route path="/processOrder" element={<ProcessOrder />} />
