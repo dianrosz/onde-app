@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import "./historyOrder.css";
-import HistoryOrderList from "./HistoryOrderList";
+import "./historyReject.css";
+import HistoryRejectList from "./HistoryRejectList";
 import { Sidebar, Header, Footer } from "../../components";
 
-const HistoryOrder = () => {
+const HistoryReject = () => {
   return (
     <Sidebar>
       <Header />
       <section>
-        <div className="historyOrder">
+        <div className="historyReject">
           <div className="judul">
             <h4>RIWAYAT PEMESANAN DITOLAK</h4>
           </div>
@@ -19,7 +19,7 @@ const HistoryOrder = () => {
                 <h5>Riwayat Pemesanan Ditolak</h5>
               </div>
               <div class="card-body">
-                <HistoryOrderList />
+                <HistoryRejectList />
               </div>
             </div>
           </div>
@@ -29,4 +29,4 @@ const HistoryOrder = () => {
     </Sidebar>
   );
 };
-export default HistoryOrder;
+export default HistoryReject;

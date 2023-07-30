@@ -47,7 +47,7 @@ const style = {
   pb: 3,
 };
 
-export default function HistoryOrderList() {
+export default function HistoryRejectList() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [rows, setRows] = useState([]);

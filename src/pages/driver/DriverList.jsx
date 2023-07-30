@@ -28,36 +28,15 @@ import {
 } from "firebase/firestore";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-
 import { Autocomplete, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import EditDriver from "../editDriver/EditDriver";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 800,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  pt: 2,
-  px: 4,
-  pb: 3,
-};
-
-export default function DriverList(onEditItem) {
+export default function DriverList() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [rows, setRows] = useState([]);
   const empCollectionRef = collection(db, "driver");
-  const [formid, setFormid] = useState(false);
   const [editopen, setEditOpen] = useState(false);
-  const handleEditOpen = () => setEditOpen(true);
-  const handleEditClose = () => setEditOpen(false);
-  const [id, setId] = useState("");
 
   const navigate = useNavigate();
 
@@ -110,30 +89,10 @@ export default function DriverList(onEditItem) {
     }
   };
 
-  const editData = (id, nama, gender) => {
-    const data = {
-      id: id,
-      nama: nama,
-      gender: gender,
-    };
-    setFormid(data);
-    handleEditOpen();
-  };
-
   return (
     <>
       {rows.length > 0 && (
         <Paper sx={{ width: "100%", overflow: "hidden" }}>
-          <Modal
-            open={editopen}
-            //onClose={handleClose}
-            aria-labelledby="parent-modal-title"
-            aria-describedby="parent-modal-description"
-          >
-            <Box sx={style}>
-              <EditDriver closeEvent={handleEditClose} fid={formid} />
-            </Box>
-          </Modal>
           <Divider />
           <Box height={10} />
           <Stack direction="row" spacing={2} className="my-2 mb-2 m-2">
@@ -200,17 +159,16 @@ export default function DriverList(onEditItem) {
                         </TableCell>
                         <TableCell key={row.id} align="left">
                           <Stack spacing={2} direction="row">
-                            <EditIcon
-                              style={{
-                                fontSize: "18px",
-                                color: "#de834e",
-                                cursor: "pointer",
-                              }}
-                              className="cursor-pointer"
-                              onClick={() =>
-                                editData(row.id, row.nama, row.gender)
-                              }
-                            />
+                            <Link to={`/editDriver/${row.id}`}>
+                              <EditIcon
+                                style={{
+                                  fontSize: "18px",
+                                  color: "#de834e",
+                                  cursor: "pointer",
+                                }}
+                                className="cursor-pointer"
+                              />
+                            </Link>
 
                             <DeleteIcon
                               style={{

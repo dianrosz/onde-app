@@ -1,16 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-unused-vars */
 import React from "react";
-import "./orderToday.css";
-import ListOrderToday from "./ListOrderToday";
+import "./orderReject.css";
+import ListOrderReject from "./ListOrderReject";
 import { Sidebar, Header, Footer } from "../../components";
 
-const OrderToday = () => {
+const OrderReject = () => {
   return (
     <Sidebar>
       <Header />
       <section>
-        <div className="orderToday">
+        <div className="orderReject">
           <div className="judul">
             <h4>RIWAYAT PEMESANAN DIPROSES</h4>
           </div>
@@ -20,7 +20,7 @@ const OrderToday = () => {
                 <h5>Riwayat pemesanan Selesai</h5>
               </div>
               <div className="card-body">
-                <ListOrderToday />
+                <ListOrderReject />
               </div>
             </div>
           </div>
@@ -30,4 +30,4 @@ const OrderToday = () => {
     </Sidebar>
   );
 };
-export default OrderToday;
+export default OrderReject;

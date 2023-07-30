@@ -104,16 +104,32 @@ export default function IsiListOrder() {
               <p class="card-text" key={card.id}>
                 Harga : {card.harga}
               </p>
-              <p class="card-text" key={card.id}>
-                Nama Pemesan : {card.pemesan}
-              </p>
-              <p class="card-text" key={card.id}>
-                No. Handphone : {card.handphone}
-              </p>
-              <p class="card-text" key={card.id}>
-                Lokasi Pengantaran : {card.pengantaran}
-              </p>
+              {card.pemesan && (
+                <p class="card-text" key={card.id}>
+                  Nama Pemesan : {card.pemesan}
+                </p>
+              )}
+              {card.nama && (
+                <p class="card-text" key={card.id}>
+                  Atas Nama : {card.nama}
+                </p>
+              )}
+              {card.handphone && (
+                <p class="card-text" key={card.id}>
+                  No. Handphone : {card.handphone}
+                </p>
+              )}
+              {card.orderan && (
+                <p class="card-text" key={card.id}>
+                  Jumlah Orderan : {card.orderan}
+                </p>
+              )}
 
+              {card.pengantaran && (
+                <p class="card-text" key={card.id}>
+                  Lokasi Pengantaran : {card.pengantaran}
+                </p>
+              )}
               {card.penjemputan && (
                 <p class="card-text" key={card.id}>
                   Lokasi Penjemputan : {card.penjemputan}
@@ -124,12 +140,24 @@ export default function IsiListOrder() {
                   Lokasi Pengambilan : {card.pengambilan}
                 </p>
               )}
+              {card.toko && (
+                <p class="card-text" key={card.id}>
+                  Nama Toko : {card.toko}
+                </p>
+              )}
+              {card.pesanan && (
+                <p class="card-text" key={card.id}>
+                  Pesanan : {card.pesanan}
+                </p>
+              )}
               <p class="card-text" key={card.id}>
                 Tanggal Transaksi : {card.tanggal}
               </p>
-              <p class="card-text" key={card.id}>
-                Catatan pemesanan: {card.Catatan}
-              </p>
+              {card.catatan && (
+                <p class="card-text" key={card.id}>
+                  Catatan : {card.catatan}
+                </p>
+              )}
             </CardContent>
             <CardActions sx={{ marginLeft: 1, marginBottom: 1 }}>
               <Button

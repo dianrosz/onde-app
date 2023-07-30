@@ -5,13 +5,13 @@ import {
   BsFillBagPlusFill,
   BsFillBagDashFill,
   BsBagCheckFill,
-  BsFillBookmarksFill,
+  BsFillBookmarkCheckFill,
   BsFillPersonFill,
   BsFillPeopleFill,
+  BsFillBookmarkXFill,
 } from "react-icons/bs";
 import { FaBars } from "react-icons/fa";
 import { AiFillHome } from "react-icons/ai";
-import { MdToday } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 
 const Sidebar = ({ children }) => {
@@ -40,14 +40,14 @@ const Sidebar = ({ children }) => {
       icon: <BsBagCheckFill size={18} />,
     },
     {
-      path: "/orderToday",
-      name: "Pemesanan Hari Ini",
-      icon: <MdToday size={18} />,
+      path: "/orderReject",
+      name: "Pemesanan Diproses",
+      icon: <BsFillBookmarkCheckFill size={18} />,
     },
     {
-      path: "/historyOrder",
-      name: "Riwayat Pemesanan",
-      icon: <BsFillBookmarksFill size={18} />,
+      path: "/historyReject",
+      name: "Pemesanan Ditolak",
+      icon: <BsFillBookmarkXFill size={18} />,
     },
     {
       path: "/Driver",

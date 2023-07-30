@@ -10,16 +10,16 @@ import {
   DriverList,
   AddDriver,
   ListOrder,
-  OrderToday,
-  ListOrderToday,
+  OrderReject,
+  ListOrderReject,
   EstimasiWaktu,
   ProcessOrder,
   ProcessOrderList,
-  HistoryOrder,
+  HistoryReject,
   IsiListOrder,
   Login,
   Registrasi,
-  HistoryOrderList,
+  HistoryRejectList,
   Orderv2,
   OrderConfirm,
   IsiOrderConfirm,
@@ -42,8 +42,8 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/registrasi" element={<Registrasi />} />
           <Route path="/order" element={<Order />} />
-          <Route path="/orderToday" element={<OrderToday />} />
-          <Route path="/orderToday" element={<ListOrderToday />} />
+          <Route path="/orderReject" element={<OrderReject />} />
+          <Route path="/orderReject" element={<ListOrderReject />} />
           <Route path="/driver" element={<Driver />} />
           <Route path="/editDriver/:id" element={<EditDriver />} />
           <Route path="/driverlist" element={<DriverList />} />
@@ -51,13 +51,14 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/addAdmin" element={<AddAdmin />} />
           <Route path="/addDriver" element={<AddDriver />} />
+
           <Route path="/listOrder" element={<ListOrder />} />
           <Route path="/isilistOrder" element={<IsiListOrder />} />
           <Route path="/processOrder" element={<ProcessOrder />} />
           <Route path="/processOrder" element={<ProcessOrderList />} />
           <Route path="/processOrder" element={<EstimasiWaktu />} />
-          <Route path="/historyOrder" element={<HistoryOrder />} />
-          <Route path="/historyOrder" element={<HistoryOrderList />} />
+          <Route path="/historyReject" element={<HistoryReject />} />
+          <Route path="/historyReject" element={<HistoryRejectList />} />
           <Route path="/orderVer2" element={<Orderv2 />} />
           <Route path="/orderConfirm" element={<OrderConfirm />} />
           <Route path="/orderConfirm" element={<IsiOrderConfirm />} />

@@ -19,6 +19,7 @@ export default function AddDriver() {
   const [plat, setPlat] = React.useState("");
   const [gender, setGender] = useState("");
   const [kendaraan, setKendaraan] = React.useState("");
+  const [catatan, setCatatan] = React.useState("");
   const [rows, setRows] = useState([]);
   const empCollectionRef = collection(db, "driver");
 
@@ -66,6 +67,10 @@ export default function AddDriver() {
     setKendaraan(event.target.value);
   };
 
+  const handleCatatanChange = (event) => {
+    setCatatan(event.target.value);
+  };
+
   const createUser = async () => {
     if (!nama || !kontak || !kendaraan || !gender || !plat) {
       toast.error("Lengkapi data terlebih dahulu");
@@ -76,6 +81,7 @@ export default function AddDriver() {
         kendaraan: kendaraan,
         gender: gender,
         plat: plat,
+        catatan: catatan,
       });
       getUsers();
       Swal.fire({
@@ -182,6 +188,8 @@ export default function AddDriver() {
                       id="outlined-multiline-static"
                       label="Catatan"
                       multiline
+                      onChange={handleCatatanChange}
+                      value={catatan}
                       rows={4}
                       sx={{ minWidth: "100%" }}
                     />

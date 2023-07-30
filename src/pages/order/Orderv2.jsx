@@ -36,7 +36,7 @@ export default function Orderv2() {
     if (!inputString || !harga) {
       toast.error("Lengkapi Data Terlebih Dahulu");
     } else {
-      const regexPattern = /(\w+)\s*=\s*(.*)/g;
+      const regexPattern = /(\w+)\s*:\s*(.*)/g;
       let match;
       const parsedValues = {};
 
