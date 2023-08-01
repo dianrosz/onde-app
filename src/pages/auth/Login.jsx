@@ -29,51 +29,6 @@ const Login = () => {
         navigate("/");
 
         // Selanjutnya, simpan data tambahan ke Firestore
-
-        const userDocRef = doc(collection(db, "admin"), user.uid);
-
-        // Periksa apakah dokumen pengguna sudah ada di Firestore
-        userDocRef.get().then((docSnapshot) => {
-          if (docSnapshot.exists) {
-            // Jika dokumen pengguna sudah ada, gunakan update untuk memperbarui data
-            userDocRef
-              .update({
-                email: email,
-                //  name: name,
-                // Anda juga dapat menambahkan data pengguna lainnya yang ingin diperbarui
-              })
-              .then(() => {
-                console.log("Data pengguna berhasil diperbarui di Firestore.");
-              })
-              .catch((error) => {
-                console.error(
-                  "Terjadi kesalahan saat memperbarui data pengguna di Firestore:",
-                  error
-                );
-              });
-          } else {
-            // Jika dokumen pengguna belum ada, gunakan set untuk menambahkan data
-            userDocRef
-              .set({
-                email: email,
-                //name: name,
-                // Anda juga dapat menambahkan data pengguna lainnya sesuai kebutuhan
-              })
-              .then(() => {
-                console.log("Data pengguna berhasil disimpan di Firestore.");
-                toast.error("Data pengguna berhasil disimpan di Firestore.");
-              })
-              .catch((error) => {
-                console.error(
-                  "Terjadi kesalahan saat menyimpan data pengguna di Firestore:",
-                  error
-                );
-                toast.error(
-                  "Terjadi kesalahan saat menyimpan data pengguna di Firestore:"
-                );
-              });
-          }
-        });
       })
       .catch((error) => {
         toast.error(error.message);

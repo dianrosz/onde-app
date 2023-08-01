@@ -77,7 +77,7 @@ export default function IsiListOrder() {
 
       // Menghapus data dari koleksi "daftar"
       await deleteDoc(doc(empCollectionRef, itemId));
-      navigate("/historyOrder");
+      navigate("/historyReject");
       Swal.fire({
         title: "Pesanan Ditolak!",
         text: "Pesanan Berhasil Ditolak",

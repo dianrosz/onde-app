@@ -48,7 +48,6 @@ export default function AddAdmin() {
         const userCredential = await createUserWithEmailAndPassword(
           auth,
           email,
-          gender,
           password
         );
 
@@ -62,6 +61,7 @@ export default function AddAdmin() {
           name: name,
           email: email,
           gender: gender,
+          password: password,
         });
 
         navigate("/admin");
