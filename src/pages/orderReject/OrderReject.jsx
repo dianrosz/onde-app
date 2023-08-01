@@ -12,7 +12,7 @@ const OrderReject = () => {
       <section>
         <div className="orderReject">
           <div className="judul">
-            <h4>RIWAYAT PEMESANAN DIPROSES</h4>
+            <h4>RIWAYAT PEMESANAN SELESAI</h4>
           </div>
           <div className="card">
             <div className="main-card">

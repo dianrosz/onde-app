@@ -30,6 +30,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Autocomplete, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { CSVLink, CSVDownload } from "react-csv";
 
 export default function DriverList() {
   const [page, setPage] = React.useState(0);
@@ -107,6 +108,7 @@ export default function DriverList() {
                 <TextField {...params} size="small" label="Cari Driver" />
               )}
             />
+
             <Typography
               variant="h6"
               component="div"
@@ -121,6 +123,26 @@ export default function DriverList() {
               + Tambah Driver
             </Button>
           </Stack>
+          <Button
+            size="small"
+            variant="contained"
+            href="/addDriver"
+            style={{
+              backgroundColor: "#2d3436",
+              margin: "15px",
+              padding: "10px",
+              color: "#f5f5f5 !important",
+            }}
+          >
+            <CSVLink
+              data={rows}
+              style={{ color: "white" }}
+              filename={"Data Driver.csv"}
+            >
+              Export to Excel
+            </CSVLink>
+          </Button>
+
           <Box height={10} />
           <TableContainer sx={{ maxHeight: 440 }}>
             <Table stickyHeader aria-label="sticky table">

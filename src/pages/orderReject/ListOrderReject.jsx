@@ -29,6 +29,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Autocomplete, TextField, Typography } from "@mui/material";
+import { CSVLink, CSVDownload } from "react-csv";
 
 export default function ListOrderReject() {
   const [page, setPage] = React.useState(0);
@@ -91,7 +92,27 @@ export default function ListOrderReject() {
             component="div"
             sx={{ flexGrow: 1 }}
           ></Typography>
+          <Button
+            size="small"
+            variant="contained"
+            href="/addDriver"
+            style={{
+              backgroundColor: "#2d3436",
+              margin: "15px",
+              padding: "10px",
+              color: "#f5f5f5 !important",
+            }}
+          >
+            <CSVLink
+              data={rows}
+              style={{ color: "white" }}
+              filename={"Daftar Pemesanan Selesai.csv"}
+            >
+              Export to Excel
+            </CSVLink>
+          </Button>
         </Stack>
+
         <Box height={10} />
         <TableContainer sx={{ maxHeight: 440 }}>
           <Table stickyHeader aria-label="sticky table">
@@ -122,7 +143,7 @@ export default function ListOrderReject() {
                         {row.layanan}
                       </TableCell>
                       <TableCell key={row.id} align="left">
-                        Selesai
+                        {row.status}
                       </TableCell>
                       <TableCell key={row.id} align="left">
                         {row.tanggal}

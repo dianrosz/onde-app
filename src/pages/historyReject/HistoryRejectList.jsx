@@ -32,20 +32,7 @@ import { Autocomplete, TextField, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import EditDriver from "../editDriver/EditDriver";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 800,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
-  boxShadow: 24,
-  pt: 2,
-  px: 4,
-  pb: 3,
-};
+import { CSVLink, CSVDownload } from "react-csv";
 
 export default function HistoryRejectList() {
   const [page, setPage] = React.useState(0);
@@ -133,6 +120,25 @@ export default function HistoryRejectList() {
             component="div"
             sx={{ flexGrow: 1 }}
           ></Typography>
+          <Button
+            size="small"
+            variant="contained"
+            href="/addDriver"
+            style={{
+              backgroundColor: "#2d3436",
+              margin: "15px",
+              padding: "10px",
+              color: "#f5f5f5 !important",
+            }}
+          >
+            <CSVLink
+              data={rows}
+              style={{ color: "white" }}
+              filename={"Daftar Pemesanan Ditolak.csv"}
+            >
+              Export to Excel
+            </CSVLink>
+          </Button>
         </Stack>
         <Box height={10} />
         <TableContainer sx={{ maxHeight: 440 }}>
