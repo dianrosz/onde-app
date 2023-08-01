@@ -97,13 +97,6 @@ export default function PageDriver({ progressId }) {
         timestamp: serverTimestamp(),
       });
 
-      // Pindahkan data dari koleksi 'drivers' ke koleksi 'hari ini'
-      const hariIniRef = doc(collection(db, "pemesananHariIni"), id); // Ganti 'hari ini' dengan nama koleksi yang Anda inginkan untuk pesanan hari ini
-      await setDoc(hariIniRef, {
-        ...data,
-        timestamp: serverTimestamp(),
-      });
-
       // Hapus data dari koleksi 'drivers' karena data telah dipindahkan
       const driversRef = doc(collection(db, "prosesPemesanan"), id);
       await deleteDoc(driversRef);

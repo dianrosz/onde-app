@@ -35,7 +35,7 @@ export default function ListOrderReject() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [rows, setRows] = useState([]);
-  const empCollectionRef = collection(db, "pemesananHariIni");
+  const empCollectionRef = collection(db, "pemesananSelesai");
   const [formid, setFormid] = useState(false);
   const [editopen, setEditOpen] = useState(false);
   const handleEditOpen = () => setEditOpen(true);
@@ -143,7 +143,7 @@ export default function ListOrderReject() {
                         {row.layanan}
                       </TableCell>
                       <TableCell key={row.id} align="left">
-                        {row.status}
+                        Selesai
                       </TableCell>
                       <TableCell key={row.id} align="left">
                         {row.tanggal}

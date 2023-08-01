@@ -100,17 +100,17 @@ export default function ProcessOrderList() {
                         {row.id}
                       </TableCell>
                       <TableCell key={row.id} align="left">
-                      {row.pemesan && (
-                        <p class="card-text" key={row.id}>
-                          {row.pemesan}
-                        </p>
-                      )}
-                      {row.nama && (
-                        <p class="card-text" key={row.id}>
-                          {row.nama}
-                        </p>
-                      )}
-                       </TableCell>
+                        {row.pemesan && (
+                          <p class="card-text" key={row.id}>
+                            {row.pemesan}
+                          </p>
+                        )}
+                        {row.nama && (
+                          <p class="card-text" key={row.id}>
+                            {row.nama}
+                          </p>
+                        )}
+                      </TableCell>
                       <TableCell key={row.id} align="left">
                         {row.layanan}
                       </TableCell>
