@@ -83,6 +83,7 @@ export default function ProcessOrderList() {
                 <TableCell align="left">ID Transaksi</TableCell>
                 <TableCell align="left">Nama Pemesan</TableCell>
                 <TableCell align="left">Kategori Layanan</TableCell>
+                <TableCell align="left">No. Handphone</TableCell>
                 <TableCell align="center">Status Pemesanan</TableCell>
                 <TableCell align="left">Harga</TableCell>
                 <TableCell align="left">Tanggal Pesanan</TableCell>
@@ -107,7 +108,10 @@ export default function ProcessOrderList() {
                       <TableCell key={row.id} align="left">
                         {row.layanan}
                       </TableCell>
-                      {/* Codingan Sementara */}
+                      <TableCell key={row.id} align="left">
+                        {row.handphone}
+                      </TableCell>
+
                       <TableCell align="center">DiProses</TableCell>
                       <TableCell key={row.id} align="left">
                         {row.harga}
@@ -115,12 +119,12 @@ export default function ProcessOrderList() {
                       <TableCell key={row.id} align="left">
                         {row.tanggal}
                       </TableCell>
-                      <TableCell align="left">
+                      <TableCell align="center">
                         <Link key={row.id} to={`/pageDriver/${row.id}`}>
                           Link Progress Driver
                         </Link>
                       </TableCell>
-                      <TableCell align="left">
+                      <TableCell align="center">
                         <Link key={row.id} to={`/pageCustomer/${row.id}`}>
                           Link Customer
                         </Link>

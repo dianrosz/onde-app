@@ -122,6 +122,7 @@ export default function ListOrderReject() {
                 <TableCell align="left">ID Transaksi</TableCell>
                 <TableCell align="left">Nama Pemesan</TableCell>
                 <TableCell align="left">Kategori Layanan</TableCell>
+                <TableCell align="left">No. handphone</TableCell>
                 <TableCell align="left">Status Pemesanan</TableCell>
                 <TableCell align="left">Harga</TableCell>
                 <TableCell align="left">Tanggal Transaksi</TableCell>
@@ -142,6 +143,9 @@ export default function ListOrderReject() {
                       </TableCell>
                       <TableCell key={row.id} align="left">
                         {row.layanan}
+                      </TableCell>
+                      <TableCell key={row.id} align="left">
+                        {row.handphone}
                       </TableCell>
                       <TableCell key={row.id} align="left">
                         Selesai
