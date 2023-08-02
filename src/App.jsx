@@ -88,16 +88,8 @@ function App() {
             exact
             element={user ? <Admin /> : <Navigate to="/login" />}
           />
-          <Route
-            path="/addAdmin"
-            exact
-            element={user ? <AddAdmin /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/addDriver"
-            exact
-            element={user ? <AddDriver /> : <Navigate to="/login" />}
-          />
+          <Route path="/addAdmin" exact element={<AddAdmin />} />
+          <Route path="/addDriver" element={<AddDriver />} />
           <Route
             path="/listOrder"
             exact
@@ -150,25 +142,11 @@ function App() {
           />
           <Route
             path="/pageDriver/:id"
-            exact
-            element={
-              user ? (
-                <PageDriver progressId="driverId" />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
+            element={<PageDriver progressId="driverId" />}
           />
           <Route
             path="/pageCustomer/:id"
-            exact
-            element={
-              user ? (
-                <PageCustomer progressId="driverId" />
-              ) : (
-                <Navigate to="/login" />
-              )
-            }
+            element={<PageCustomer progressId="driverId" />}
           />
         </Routes>
       </BrowserRouter>

@@ -19,6 +19,7 @@ export default function AddDriver() {
   const [plat, setPlat] = React.useState("");
   const [gender, setGender] = useState("");
   const [kendaraan, setKendaraan] = React.useState("");
+  const [status, setStatus] = React.useState("");
   const [catatan, setCatatan] = React.useState("");
   const [rows, setRows] = useState([]);
   const empCollectionRef = collection(db, "driver");
@@ -47,6 +48,17 @@ export default function AddDriver() {
     },
   ];
 
+  const chooseStatus = [
+    {
+      value: "Aktif",
+      label: "Aktif",
+    },
+    {
+      value: "Tidak Aktif",
+      label: "Tidak Aktif",
+    },
+  ];
+
   const handleNamaChange = (event) => {
     setNama(event.target.value);
   };
@@ -67,12 +79,16 @@ export default function AddDriver() {
     setKendaraan(event.target.value);
   };
 
+  const handleStatusChange = (event) => {
+    setStatus(event.target.value);
+  };
+
   const handleCatatanChange = (event) => {
     setCatatan(event.target.value);
   };
 
   const createUser = async () => {
-    if (!nama || !kontak || !kendaraan || !gender || !plat) {
+    if (!nama || !kontak || !kendaraan || !gender || !plat || !status) {
       toast.error("Lengkapi data terlebih dahulu");
     } else {
       await addDoc(empCollectionRef, {
@@ -81,6 +97,7 @@ export default function AddDriver() {
         kendaraan: kendaraan,
         gender: gender,
         plat: plat,
+        status: status,
         catatan: catatan,
       });
       getUsers();
@@ -113,7 +130,7 @@ export default function AddDriver() {
               </div>
               <div className="card-body">
                 <Grid container spacing={2}>
-                  <Grid item xs={12}>
+                  <Grid item xs={6}>
                     <TextField
                       id="outlined-basic"
                       label="Nama Lengkap Driver"
@@ -123,6 +140,24 @@ export default function AddDriver() {
                       value={nama}
                       sx={{ minWidth: "100%" }}
                     />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      id="outlined-basic"
+                      label="Status"
+                      variant="outlined"
+                      select
+                      required
+                      onChange={handleStatusChange}
+                      value={status}
+                      sx={{ minWidth: "100%" }}
+                    >
+                      {chooseStatus.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
                   </Grid>
                   <Grid item xs={6}>
                     <TextField

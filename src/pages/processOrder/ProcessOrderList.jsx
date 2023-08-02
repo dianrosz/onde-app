@@ -86,7 +86,7 @@ export default function ProcessOrderList() {
                 <TableCell align="center">Status Pemesanan</TableCell>
                 <TableCell align="left">Harga</TableCell>
                 <TableCell align="left">Tanggal Pesanan</TableCell>
-                <TableCell align="left">Genarate Link Progress</TableCell>
+                <TableCell align="left">Link Progress</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -100,16 +100,8 @@ export default function ProcessOrderList() {
                         {row.id}
                       </TableCell>
                       <TableCell key={row.id} align="left">
-                        {row.pemesan && (
-                          <p class="card-text" key={row.id}>
-                            {row.pemesan}
-                          </p>
-                        )}
-                        {row.nama && (
-                          <p class="card-text" key={row.id}>
-                            {row.nama}
-                          </p>
-                        )}
+                        {row.pemesan && <p key={row.id}>{row.pemesan}</p>}
+                        {row.nama && <p key={row.id}>{row.nama}</p>}
                       </TableCell>
                       <TableCell key={row.id} align="left">
                         {row.layanan}
