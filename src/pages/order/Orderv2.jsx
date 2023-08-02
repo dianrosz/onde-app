@@ -34,7 +34,7 @@ export default function Orderv2() {
 
   const parseInputString = async () => {
     if (!inputString || !harga) {
-      toast.error("Lengkapi Data Terlebih Dahulu");
+      toast.error("Lengkapi pemesanan terlebih dahulu!");
     } else {
       const regexPattern = /(\w+)\s*:\s*(.*)/g;
       let match;
@@ -48,7 +48,7 @@ export default function Orderv2() {
 
         Swal.fire({
           title: "Berhasil!",
-          text: "Data Berhasil Di Proses",
+          text: "Pemesanan diproses",
           confirmButtonColor: "#de834e",
         });
         navigate("/listOrder");

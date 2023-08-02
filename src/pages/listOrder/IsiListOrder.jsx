@@ -56,7 +56,7 @@ export default function IsiListOrder() {
 
       Swal.fire({
         title: "Berhasil!",
-        text: "Pesanan Diterima",
+        text: "Pemesanan Diterima",
         confirmButtonColor: "#de834e",
       });
     } catch (error) {
@@ -79,8 +79,8 @@ export default function IsiListOrder() {
       await deleteDoc(doc(empCollectionRef, itemId));
       navigate("/historyReject");
       Swal.fire({
-        title: "Pesanan Ditolak!",
-        text: "Pesanan Berhasil Ditolak",
+        title: "Pemesanan ditolak",
+        text: "Data pemesanan masuk riwayat ditolak",
         confirmButtonColor: "#de834e",
       });
     } catch (error) {
