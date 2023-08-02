@@ -86,7 +86,8 @@ export default function ProcessOrderList() {
                 <TableCell align="center">Status Pemesanan</TableCell>
                 <TableCell align="left">Harga</TableCell>
                 <TableCell align="left">Tanggal Pesanan</TableCell>
-                <TableCell align="left">Link Progress</TableCell>
+                <TableCell align="left">Link Progress Driver</TableCell>
+                <TableCell align="left">Link Customer</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -116,10 +117,12 @@ export default function ProcessOrderList() {
                       </TableCell>
                       <TableCell align="left">
                         <Link key={row.id} to={`/pageDriver/${row.id}`}>
-                          Link Progress Driver |
+                          Link Progress Driver
                         </Link>
+                      </TableCell>
+                      <TableCell align="left">
                         <Link key={row.id} to={`/pageCustomer/${row.id}`}>
-                          | Link Customer
+                          Link Customer
                         </Link>
                       </TableCell>
                     </TableRow>

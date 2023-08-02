@@ -25,10 +25,15 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+
+        if (userCredential.user) {
+          localStorage.setItem("user", JSON.stringify(userCredential.user));
+        } else {
+          console.log("Data pengguna tidak valid.");
+        }
+
         toast.success("Login Berhasil");
         navigate("/");
-
-        // Selanjutnya, simpan data tambahan ke Firestore
       })
       .catch((error) => {
         toast.error(error.message);

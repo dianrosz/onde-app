@@ -15,6 +15,7 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         toast.success("Anda telah keluar");
+        localStorage.removeItem("user");
         navigate("/login");
       })
       .catch((error) => {

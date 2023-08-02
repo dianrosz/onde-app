@@ -34,7 +34,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "./firebase/config";
 
 function App() {
-  const [user] = useAuthState(auth);
+  const storedUser = localStorage.getItem("user");
+  const user = storedUser ? JSON.parse(storedUser) : null;
+
   return (
     <>
       <BrowserRouter>
@@ -88,8 +90,16 @@ function App() {
             exact
             element={user ? <Admin /> : <Navigate to="/login" />}
           />
-          <Route path="/addAdmin" exact element={<AddAdmin />} />
-          <Route path="/addDriver" element={<AddDriver />} />
+          <Route
+            path="/addAdmin"
+            exact
+            element={user ? <AddAdmin /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/addDriver"
+            exact
+            element={user ? <AddDriver /> : <Navigate to="/login" />}
+          />
           <Route
             path="/listOrder"
             exact

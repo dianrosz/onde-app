@@ -50,6 +50,11 @@ export default function AddAdmin() {
           email,
           password
         );
+        if (userCredential.user) {
+          localStorage.setItem("user", JSON.stringify(userCredential.user));
+        } else {
+          console.log("Data pengguna tidak valid.");
+        }
 
         toast.success("Berhasil menambahkan admin");
         // Mendapatkan UID dari pengguna yang baru dibuat
