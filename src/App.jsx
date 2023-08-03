@@ -43,109 +43,29 @@ function App() {
         <ToastContainer />
 
         <Routes>
-          <Route
-            path="/"
-            exact
-            element={user ? <Home /> : <Navigate to="/login" />}
-          />
+          <Route path="/" exact element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registrasi" element={<Registrasi />} />
           <Route path="/order" exact element={<Order />} />
-          <Route
-            path="/orderReject"
-            exact
-            element={user ? <OrderReject /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/orderReject"
-            exact
-            element={user ? <ListOrderReject /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/driver"
-            exact
-            element={user ? <Driver /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/editDriver/:id"
-            exact
-            element={user ? <EditDriver /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/driverlist"
-            exact
-            element={user ? <DriverList /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/adminlist"
-            exact
-            element={user ? <AdminList /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/admin"
-            exact
-            element={user ? <Admin /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/addAdmin"
-            exact
-            element={user ? <AddAdmin /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/addDriver"
-            exact
-            element={user ? <AddDriver /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/listOrder"
-            exact
-            element={user ? <ListOrder /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/isilistOrder"
-            exact
-            element={user ? <IsiListOrder /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/processOrder"
-            exact
-            element={user ? <ProcessOrder /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/processOrder"
-            exact
-            element={user ? <ProcessOrderList /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/processOrder"
-            exact
-            element={user ? <EstimasiWaktu /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/historyReject"
-            exact
-            element={user ? <HistoryReject /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/historyReject"
-            exact
-            element={user ? <HistoryRejectList /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/orderVer2"
-            exact
-            element={user ? <Orderv2 /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/orderConfirm"
-            exact
-            element={user ? <OrderConfirm /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="/orderConfirm"
-            exact
-            element={user ? <IsiOrderConfirm /> : <Navigate to="/login" />}
-          />
+          <Route path="/orderReject" exact element={<OrderReject />} />
+          <Route path="/orderReject" exact element={<ListOrderReject />} />
+          <Route path="/driver" exact element={<Driver />} />
+          <Route path="/editDriver/:id" exact element={<EditDriver />} />
+          <Route path="/driverlist" exact element={<DriverList />} />
+          <Route path="/adminlist" exact element={<AdminList />} />
+          <Route path="/admin" exact element={<Admin />} />
+          <Route path="/addAdmin" exact element={<AddAdmin />} />
+          <Route path="/addDriver" exact element={<AddDriver />} />
+          <Route path="/listOrder" exact element={<ListOrder />} />
+          <Route path="/isilistOrder" exact element={<IsiListOrder />} />
+          <Route path="/processOrder" exact element={<ProcessOrder />} />
+          <Route path="/processOrder" exact element={<ProcessOrderList />} />
+          <Route path="/processOrder" exact element={<EstimasiWaktu />} />
+          <Route path="/historyReject" exact element={<HistoryReject />} />
+          <Route path="/historyReject" exact element={<HistoryRejectList />} />
+          <Route path="/orderVer2" exact element={<Orderv2 />} />
+          <Route path="/orderConfirm" exact element={<OrderConfirm />} />
+          <Route path="/orderConfirm" exact element={<IsiOrderConfirm />} />
           <Route
             path="/pageDriver/:id"
             element={<PageDriver progressId="driverId" />}
