@@ -119,6 +119,11 @@ export default function IsiListOrder() {
                   No. Handphone : {card.handphone}
                 </p>
               )}
+              {card.driver && (
+                <p class="card-text" key={card.id}>
+                  Nama driver : {card.driver}
+                </p>
+              )}
               {card.orderan && (
                 <p class="card-text" key={card.id}>
                   Jumlah Orderan : {card.orderan}

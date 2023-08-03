@@ -151,6 +151,7 @@ export default function HistoryRejectList() {
                 <TableCell align="left">Kategori Layanan</TableCell>
 
                 <TableCell align="left">Status</TableCell>
+                <TableCell align="left">Nama Driver</TableCell>
                 <TableCell align="center">Tanggal Pemesanan</TableCell>
                 <TableCell align="left">Harga</TableCell>
               </TableRow>
@@ -179,7 +180,9 @@ export default function HistoryRejectList() {
                       <TableCell key={row.id} align="left">
                         DiTolak
                       </TableCell>
-
+                      <TableCell key={row.id} align="left">
+                        {row.driver}
+                      </TableCell>
                       <TableCell key={row.id} align="center">
                         {row.tanggal}
                       </TableCell>

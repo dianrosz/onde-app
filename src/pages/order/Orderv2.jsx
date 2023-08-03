@@ -1,24 +1,61 @@
 /* eslint-disable no-unused-vars */
 import * as React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { db } from "../../firebase/config";
 import TextField from "@mui/material/TextField";
-import { collection, getDocs, addDoc } from "firebase/firestore";
-import { Grid, Typography } from "@mui/material";
+import { collection, getDocs, addDoc, doc, setDoc } from "firebase/firestore";
+import {
+  Grid,
+  Typography,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Select,
+} from "@mui/material";
 import Button from "@mui/material/Button";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { onSnapshot } from "firebase/firestore";
 
 export default function Orderv2() {
   const [inputString, setInputString] = useState("");
   const [values, setValues] = useState({});
   const [harga, setHarga] = useState([]);
   const [tanggal, setTanggal] = useState(new Date());
-  const [rows, setRows] = useState([]);
-  const empCollectionRef = collection(db, "pemesanan");
+  const [options, setOptions] = useState([]);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [driver, setSelectedDriver] = useState("");
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      collection(db, "driver"),
+      (querySnapshot) => {
+        const data = querySnapshot.docs.map((doc) => ({
+          value: doc.id,
+          label: doc.data().nama,
+        }));
+
+        setOptions(data);
+      }
+    );
+
+    return () => unsubscribe();
+  }, []);
+
+  const handleChange = (event) => {
+    const selectedValue = event.target.value;
+    setSelectedOption(selectedValue);
+
+    // Save the selected label to Firestore "terpilih" collection
+    const selectedOptionRef = doc(db, "pemesanan", selectedValue);
+    const label = options.find(
+      (option) => option.value === selectedValue
+    )?.label;
+    setSelectedDriver(label); // Mengupdate driver dengan label yang dipilih
+  };
 
   const handleInputChange = (event) => {
     setInputString(event.target.value);
@@ -33,7 +70,7 @@ export default function Orderv2() {
   };
 
   const parseInputString = async () => {
-    if (!inputString || !harga) {
+    if (!inputString || !harga || !driver) {
       toast.error("Lengkapi pemesanan terlebih dahulu!");
     } else {
       const regexPattern = /(\w+)\s*:\s*(.*)/g;
@@ -58,6 +95,7 @@ export default function Orderv2() {
         ...parsedValues,
         harga,
         tanggal,
+        driver,
       };
 
       const collectionRef = collection(db, "pemesanan");
@@ -86,6 +124,7 @@ export default function Orderv2() {
             sx={{ minWidth: "100%" }}
           />
         </Grid>
+
         <Grid item xs={6}>
           <TextField
             required
@@ -109,6 +148,23 @@ export default function Orderv2() {
             variant="outlined"
             sx={{ minWidth: "100%" }}
           />
+        </Grid>
+        <Grid item xs={12}>
+          <TextField
+            required
+            id="outlined-number"
+            label="Pilih Driver"
+            value={selectedOption}
+            onChange={handleChange}
+            select
+            sx={{ minWidth: "100%" }}
+          >
+            {options.map((option) => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h5" align="right">

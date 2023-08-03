@@ -50,11 +50,7 @@ function App() {
           />
           <Route path="/login" element={<Login />} />
           <Route path="/registrasi" element={<Registrasi />} />
-          <Route
-            path="/order"
-            exact
-            element={user ? <Order /> : <Navigate to="/login" />}
-          />
+          <Route path="/order" exact element={<Order />} />
           <Route
             path="/orderReject"
             exact

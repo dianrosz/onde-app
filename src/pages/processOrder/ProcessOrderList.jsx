@@ -85,6 +85,7 @@ export default function ProcessOrderList() {
                 <TableCell align="left">Kategori Layanan</TableCell>
                 <TableCell align="left">No. Handphone</TableCell>
                 <TableCell align="center">Status Pemesanan</TableCell>
+                <TableCell align="center">Nama Driver</TableCell>
                 <TableCell align="left">Harga</TableCell>
                 <TableCell align="left">Tanggal Pesanan</TableCell>
                 <TableCell align="left">Link Progress Driver</TableCell>
@@ -113,6 +114,9 @@ export default function ProcessOrderList() {
                       </TableCell>
 
                       <TableCell align="center">DiProses</TableCell>
+                      <TableCell key={row.id} align="center">
+                        {row.driver}
+                      </TableCell>
                       <TableCell key={row.id} align="left">
                         {row.harga}
                       </TableCell>
