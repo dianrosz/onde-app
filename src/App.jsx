@@ -49,8 +49,12 @@ function App() {
             element={user ? <Home /> : <Navigate to="/login" />}
           />
           <Route path="/login" element={<Login />} />
-          <Route path="/registrasi" element={<Registrasi />} />
-          <Route path="/order" exact element={<Order />} />
+
+          <Route
+            exact
+            path="/order"
+            element={user ? <Order /> : <Navigate to="/login" />}
+          />
           <Route
             path="/orderReject"
             exact

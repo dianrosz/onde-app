@@ -32,6 +32,7 @@ export default function EditDriver() {
   const [plat, setPlat] = React.useState("");
   const [gender, setGender] = useState("");
   const [kendaraan, setKendaraan] = React.useState("");
+  const [status, setStatus] = React.useState("");
   const [catatan, setCatatan] = React.useState("");
   const [rows, setRows] = useState([]);
   const empCollectionRef = collection(db, "driver");
@@ -50,6 +51,7 @@ export default function EditDriver() {
           setPlat(data.plat || "");
           setGender(data.gender || "");
           setKendaraan(data.kendaraan || "");
+          setStatus(data.status || "");
           setCatatan(data.catatan || "");
         } else {
           setNama(""); // Dokumen tidak ditemukan, maka setNama("") akan digunakan
@@ -57,6 +59,7 @@ export default function EditDriver() {
           setPlat("");
           setGender("");
           setKendaraan("");
+          setStatus("");
           setCatatan("");
         }
       });
@@ -90,6 +93,17 @@ export default function EditDriver() {
     },
   ];
 
+  const chooseStatus = [
+    {
+      value: "Aktif",
+      label: "Aktif",
+    },
+    {
+      value: "Tidak Aktif",
+      label: "Tidak Aktif",
+    },
+  ];
+
   const handleNamaChange = (event) => {
     setNama(event.target.value);
   };
@@ -114,6 +128,10 @@ export default function EditDriver() {
     setCatatan(event.target.value);
   };
 
+  const handleStatusChange = (event) => {
+    setStatus(event.target.value);
+  };
+
   const createUser = async () => {
     if (!nama || !kontak || !kendaraan || !gender || !plat) {
       toast.error("Lengkapi data terlebih dahulu");
@@ -126,6 +144,7 @@ export default function EditDriver() {
           kendaraan,
           gender,
           plat,
+          status,
           catatan,
         });
         Swal.fire({
@@ -170,6 +189,24 @@ export default function EditDriver() {
                       value={nama || ""}
                       sx={{ minWidth: "100%" }}
                     />
+                  </Grid>
+                  <Grid item xs={6}>
+                    <TextField
+                      id="outlined-basic"
+                      label="Status"
+                      variant="outlined"
+                      select
+                      required
+                      onChange={handleStatusChange}
+                      value={status}
+                      sx={{ minWidth: "100%" }}
+                    >
+                      {chooseStatus.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
                   </Grid>
                   <Grid item xs={6}>
                     <TextField

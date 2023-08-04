@@ -18,7 +18,6 @@ export { default as HistoryReject } from "./historyReject/HistoryReject";
 export { default as HistoryRejectList } from "./historyReject/HistoryRejectList";
 export { default as Login } from "./auth/Login";
 export { default as Reset } from "./auth/Reset";
-export { default as Registrasi } from "./auth/Registrasi";
 export { default as Orderv2 } from "./order/Orderv2";
 export { default as OrderConfirm } from "./orderConfirm/OrderConfirm";
 export { default as IsiOrderConfirm } from "./orderConfirm/IsiOrderConfirm";

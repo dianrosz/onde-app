@@ -153,6 +153,7 @@ export default function DriverList() {
                   <TableCell align="left">Jenis Kendaraan</TableCell>
                   <TableCell align="left">No. Plat Kendaraan</TableCell>
                   <TableCell align="left">Kontak</TableCell>
+                  <TableCell align="left">Status</TableCell>
                   <TableCell align="left">Jenis Kelamin</TableCell>
                   <TableCell align="left">Aksi</TableCell>
                 </TableRow>
@@ -175,6 +176,9 @@ export default function DriverList() {
                         </TableCell>
                         <TableCell key={row.id} align="left">
                           {row.kontak}
+                        </TableCell>
+                        <TableCell key={row.id} align="left">
+                          {row.status}
                         </TableCell>
                         <TableCell key={row.id} align="left">
                           {row.gender}
